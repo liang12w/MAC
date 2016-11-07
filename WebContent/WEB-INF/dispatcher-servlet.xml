@@ -1,39 +1,53 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
+<!-- was: <?xml version="1.0" encoding="GBK"?> -->
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
-       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/beans 
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/aop 
+            http://www.springframework.org/schema/aop/spring-aop.xsd
+            http://www.springframework.org/schema/tx 
+            http://www.springframework.org/schema/tx/spring-tx.xsd 
+            http://www.springframework.org/schema/mvc 
+            http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!-- 添加注解驱动 -->  
+    <mvc:annotation-driven />
 
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
-
-    <!--
-    Most controllers will use the ControllerClassNameHandlerMapping above, but
-    for the index controller we are using ParameterizableViewController, so we must
-    define an explicit mapping for it.
-    -->
-    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-        <property name="mappings">
-            <props>
-                <prop key="index.htm">indexController</prop>
-            </props>
-        </property>
-    </bean>
-
+    
+    <!-- 启动扫描所有的controller 只扫描mvc，不扫描service -->
+    <context:component-scan base-package="com">
+        <!-- 
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        -->
+    </context:component-scan> 
+    
+<!--    <mvc:default-servlet-handler />
+    
+    <mvc:resources mapping="/cms/**" location="/cms/" />
+    <mvc:resources mapping="/css/**" location="/css/" />
+    <mvc:resources mapping="/editor/**" location="/editor/" />
+    <mvc:resources mapping="/scripts/**" location="/scripts/" />
+    <mvc:resources mapping="/images/**" location="/images/" />
+    <mvc:resources mapping="/style/**" location="/style/" />
+    
+    <bean  class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
+        <property name="order" value="10"></property>  
+        <property name="prefix" value="/"></property>  
+        <property name="contentType" value="text/html"></property>  
+    </bean>-->
+    
     <bean id="viewResolver"
-          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          p:prefix="/WEB-INF/jsp/"
-          p:suffix=".jsp" />
-
-    <!--
-    The index controller.
-    -->
-    <bean name="indexController"
-          class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-          p:viewName="index" />
-
+              class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+              p:prefix="/"
+              p:suffix=".do"
+    />
 </beans>

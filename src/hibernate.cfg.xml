@@ -2,23 +2,13 @@
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/gifme?zeroDateTimeBehavior=convertToNull</property>
-    <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">123456</property>
-    <mapping resource="beans/Moments.hbm.xml"/>
-    <mapping resource="beans/Comments.hbm.xml"/>
-    <mapping resource="beans/UserInfo.hbm.xml"/>
-    <mapping resource="beans/UserPassword.hbm.xml"/>
-    <mapping resource="beans/Likes.hbm.xml"/>
-    <mapping resource="beans/AdminCommentReviewLog.hbm.xml"/>
-    <mapping resource="beans/GroupMembers.hbm.xml"/>
-    <mapping resource="beans/AdminPassword.hbm.xml"/>
-    <mapping resource="beans/Follows.hbm.xml"/>
-    <mapping resource="beans/AdminMomentsReviewLog.hbm.xml"/>
-    <mapping resource="beans/AdminAccountFrozenLog.hbm.xml"/>
-    <mapping resource="beans/Admin.hbm.xml"/>
-    <mapping resource="beans/Group.hbm.xml"/>
+    <!-- 配置 hibernate 的基本属性 -->
+    <!-- 方言 -->
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+    <!-- 是否显示及格式化 SQL -->
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.format_sql">true</property>
+    <!-- 生成数据表的策略 -->
+    <property name="hibernate.hbm2ddl.auto">update</property>
   </session-factory>
 </hibernate-configuration>
