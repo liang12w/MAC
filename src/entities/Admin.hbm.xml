@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 7, 2016 2:03:09 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Nov 7, 2016 4:37:40 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="beans.Admin" table="admin" catalog="gifme" optimistic-lock="version">
+    <class name="entities.Admin" table="admin" catalog="gifme" optimistic-lock="version">
         <id name="adId" type="java.lang.Integer">
             <column name="AD_ID" />
             <generator class="identity" />
@@ -14,24 +14,24 @@
         <property name="adLevel" type="java.lang.Integer">
             <column name="AD_LEVEL" />
         </property>
-        <one-to-one name="adminPassword" class="beans.AdminPassword"></one-to-one>
+        <one-to-one name="adminPassword" class="entities.AdminPassword"></one-to-one>
         <set name="adminAccountFrozenLogs" table="admin_account_frozen_log" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="ADA_EXECUTE_ADMIN" />
             </key>
-            <one-to-many class="beans.AdminAccountFrozenLog" />
+            <one-to-many class="entities.AdminAccountFrozenLog" />
         </set>
         <set name="adminMomentsReviewLogs" table="admin_moments_review_log" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="ADM_EXECUTE_ADMIN" />
             </key>
-            <one-to-many class="beans.AdminMomentsReviewLog" />
+            <one-to-many class="entities.AdminMomentsReviewLog" />
         </set>
         <set name="adminCommentReviewLogs" table="admin_comment_review_log" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="ADC_EXECUTE_ADMIN" />
             </key>
-            <one-to-many class="beans.AdminCommentReviewLog" />
+            <one-to-many class="entities.AdminCommentReviewLog" />
         </set>
     </class>
 </hibernate-mapping>

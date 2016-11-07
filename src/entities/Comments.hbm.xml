@@ -1,20 +1,20 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 7, 2016 2:03:09 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Nov 7, 2016 4:37:40 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="beans.Comments" table="comments" catalog="gifme" optimistic-lock="version">
+    <class name="entities.Comments" table="comments" catalog="gifme" optimistic-lock="version">
         <id name="comtId" type="java.lang.Integer">
             <column name="COMT_ID" />
             <generator class="identity" />
         </id>
-        <many-to-one name="comments" class="beans.Comments" fetch="select">
+        <many-to-one name="comments" class="entities.Comments" fetch="select">
             <column name="COMT_ORIGIN_COMMENT_ID" />
         </many-to-one>
-        <many-to-one name="moments" class="beans.Moments" fetch="select">
+        <many-to-one name="moments" class="entities.Moments" fetch="select">
             <column name="COMT_MOT_ID" />
         </many-to-one>
-        <many-to-one name="userInfo" class="beans.UserInfo" fetch="select">
+        <many-to-one name="userInfo" class="entities.UserInfo" fetch="select">
             <column name="COMT_USR_ID" />
         </many-to-one>
         <property name="comtContent" type="string">
@@ -26,12 +26,12 @@
         <property name="comtVisable" type="java.lang.Integer">
             <column name="COMT_VISABLE" />
         </property>
-        <one-to-one name="adminCommentReviewLog" class="beans.AdminCommentReviewLog"></one-to-one>
+        <one-to-one name="adminCommentReviewLog" class="entities.AdminCommentReviewLog"></one-to-one>
         <set name="commentses" table="comments" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="COMT_ORIGIN_COMMENT_ID" />
             </key>
-            <one-to-many class="beans.Comments" />
+            <one-to-many class="entities.Comments" />
         </set>
     </class>
 </hibernate-mapping>

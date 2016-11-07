@@ -1,20 +1,20 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 7, 2016 2:03:09 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Nov 7, 2016 4:37:40 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="beans.AdminMomentsReviewLog" table="admin_moments_review_log" catalog="gifme" optimistic-lock="version">
+    <class name="entities.AdminMomentsReviewLog" table="admin_moments_review_log" catalog="gifme" optimistic-lock="version">
         <id name="adtMomentId" type="int">
             <column name="ADT_MOMENT_ID" />
             <generator class="foreign">
                 <param name="property">moments</param>
             </generator>
         </id>
-        <many-to-one name="admin" class="beans.Admin" fetch="select">
+        <many-to-one name="admin" class="entities.Admin" fetch="select">
             <column name="ADM_EXECUTE_ADMIN" />
         </many-to-one>
-        <one-to-one name="moments" class="beans.Moments" constrained="true"></one-to-one>
-        <many-to-one name="userInfo" class="beans.UserInfo" fetch="select">
+        <one-to-one name="moments" class="entities.Moments" constrained="true"></one-to-one>
+        <many-to-one name="userInfo" class="entities.UserInfo" fetch="select">
             <column name="ADM_MOMENT_USER_ID" />
         </many-to-one>
         <property name="admMomentRemoveTime" type="timestamp">
