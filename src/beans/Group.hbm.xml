@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 7, 2016 2:03:09 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="beans.Group" table="group" catalog="gifme" optimistic-lock="version">
+        <id name="grpId" type="int">
+            <column name="GRP__ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="grpGroupName" type="string">
+            <column name="GRP_GROUP_NAME" />
+        </property>
+        <one-to-one name="groupMembers" class="beans.GroupMembers"></one-to-one>
+    </class>
+</hibernate-mapping>

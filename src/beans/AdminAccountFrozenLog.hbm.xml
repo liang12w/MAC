@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 7, 2016 2:03:09 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="beans.AdminAccountFrozenLog" table="admin_account_frozen_log" catalog="gifme" optimistic-lock="version">
+        <id name="adaFrozenUserId" type="int">
+            <column name="ADA_FROZEN_USER_ID" />
+            <generator class="foreign">
+                <param name="property">userInfo</param>
+            </generator>
+        </id>
+        <many-to-one name="admin" class="beans.Admin" fetch="select">
+            <column name="ADA_EXECUTE_ADMIN" />
+        </many-to-one>
+        <one-to-one name="userInfo" class="beans.UserInfo" constrained="true"></one-to-one>
+        <property name="adaFrozenTime" type="timestamp">
+            <column name="ADA_FROZEN_TIME" length="19" />
+        </property>
+        <property name="adaFrozenMsg" type="string">
+            <column name="ADA_FROZEN_MSG" />
+        </property>
+        <property name="acaActivatedTime" type="timestamp">
+            <column name="ACA_ACTIVATED_TIME" length="19" />
+        </property>
+    </class>
+</hibernate-mapping>

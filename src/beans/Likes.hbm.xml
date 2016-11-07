@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 7, 2016 2:03:09 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="beans.Likes" table="likes" catalog="gifme" optimistic-lock="version">
+        <id name="likId" type="java.lang.Integer">
+            <column name="LIK_ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="moments" class="beans.Moments" fetch="select">
+            <column name="LIK_MOT_ID" />
+        </many-to-one>
+        <many-to-one name="userInfo" class="beans.UserInfo" fetch="select">
+            <column name="LIK_USR_ID" />
+        </many-to-one>
+        <property name="likTime" type="timestamp">
+            <column name="LIK_TIME" length="19" />
+        </property>
+    </class>
+</hibernate-mapping>

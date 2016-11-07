@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 7, 2016 2:03:09 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="beans.Follows" table="follows" catalog="gifme" optimistic-lock="version">
+        <id name="followedId" type="int">
+            <column name="FOLLOWED_ID" />
+            <generator class="foreign">
+                <param name="property">userInfoByUsrId</param>
+            </generator>
+        </id>
+        <many-to-one name="userInfoByFollowerId" class="beans.UserInfo" fetch="select">
+            <column name="FOLLOWER_ID" not-null="true">
+                <comment>USER'S FOLLOWERS</comment>
+            </column>
+        </many-to-one>
+        <one-to-one name="userInfoByUsrId" class="beans.UserInfo" constrained="true"></one-to-one>
+    </class>
+</hibernate-mapping>
