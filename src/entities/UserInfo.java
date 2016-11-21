@@ -1,7 +1,8 @@
 package entities;
-// Generated Nov 7, 2016 4:37:39 PM by Hibernate Tools 4.3.1
+// Generated Nov 21, 2016 3:22:25 PM by Hibernate Tools 4.3.1
 
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,6 +20,9 @@ public class UserInfo  implements java.io.Serializable {
      private String usrEmail;
      private Integer usrLoginType;
      private Integer usrAccountStatus;
+     private String securityId;
+     private Date firstLogin;
+     private Date lastLogin;
      private AdminAccountFrozenLog adminAccountFrozenLog;
      private Set followsesForFollowerId = new HashSet(0);
      private Set adminCommentReviewLogs = new HashSet(0);
@@ -33,7 +37,7 @@ public class UserInfo  implements java.io.Serializable {
     public UserInfo() {
     }
 
-    public UserInfo(String usrName, String usrNickname, String usrDesc, String usrPhotoUri, String usrEmail, Integer usrLoginType, Integer usrAccountStatus, AdminAccountFrozenLog adminAccountFrozenLog, Set followsesForFollowerId, Set adminCommentReviewLogs, Set adminMomentsReviewLogs, Follows followsByUsrId, Set likeses, Set commentses, Set momentses, Set groupMemberses, UserPassword userPassword) {
+    public UserInfo(String usrName, String usrNickname, String usrDesc, String usrPhotoUri, String usrEmail, Integer usrLoginType, Integer usrAccountStatus, String securityId, Date firstLogin, Date lastLogin, AdminAccountFrozenLog adminAccountFrozenLog, Set followsesForFollowerId, Set adminCommentReviewLogs, Set adminMomentsReviewLogs, Follows followsByUsrId, Set likeses, Set commentses, Set momentses, Set groupMemberses, UserPassword userPassword) {
        this.usrName = usrName;
        this.usrNickname = usrNickname;
        this.usrDesc = usrDesc;
@@ -41,6 +45,9 @@ public class UserInfo  implements java.io.Serializable {
        this.usrEmail = usrEmail;
        this.usrLoginType = usrLoginType;
        this.usrAccountStatus = usrAccountStatus;
+       this.securityId = securityId;
+       this.firstLogin = firstLogin;
+       this.lastLogin = lastLogin;
        this.adminAccountFrozenLog = adminAccountFrozenLog;
        this.followsesForFollowerId = followsesForFollowerId;
        this.adminCommentReviewLogs = adminCommentReviewLogs;
@@ -108,6 +115,27 @@ public class UserInfo  implements java.io.Serializable {
     
     public void setUsrAccountStatus(Integer usrAccountStatus) {
         this.usrAccountStatus = usrAccountStatus;
+    }
+    public String getSecurityId() {
+        return this.securityId;
+    }
+    
+    public void setSecurityId(String securityId) {
+        this.securityId = securityId;
+    }
+    public Date getFirstLogin() {
+        return this.firstLogin;
+    }
+    
+    public void setFirstLogin(Date firstLogin) {
+        this.firstLogin = firstLogin;
+    }
+    public Date getLastLogin() {
+        return this.lastLogin;
+    }
+    
+    public void setLastLogin(Date lastLogin) {
+        this.lastLogin = lastLogin;
     }
     public AdminAccountFrozenLog getAdminAccountFrozenLog() {
         return this.adminAccountFrozenLog;

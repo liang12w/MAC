@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Nov 7, 2016 4:37:40 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Nov 21, 2016 3:22:26 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="entities.UserInfo" table="user_info" catalog="gifme" optimistic-lock="version">
         <id name="usrId" type="java.lang.Integer">
@@ -32,6 +32,15 @@
             <column name="USR_ACCOUNT_STATUS">
                 <comment>ACCOUNT STATUS(NORMAL: 0/FROZEN:1)</comment>
             </column>
+        </property>
+        <property name="securityId" type="string">
+            <column name="SECURITY_ID" />
+        </property>
+        <property name="firstLogin" type="timestamp">
+            <column name="FIRST_LOGIN" length="19" />
+        </property>
+        <property name="lastLogin" type="timestamp">
+            <column name="LAST_LOGIN" length="19" />
         </property>
         <one-to-one name="adminAccountFrozenLog" class="entities.AdminAccountFrozenLog"></one-to-one>
         <set name="followsesForFollowerId" table="follows" inverse="true" lazy="true" fetch="select">
