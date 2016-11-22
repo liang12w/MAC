@@ -24,11 +24,11 @@ public class UserService {
     public boolean checkSid(UserInfo Sid){
     	return userDao.checkSid(Sid);
     }
-//    public boolean isExist(String name){
-//    	return userDao.isExist();
-//    }
-//    public boolean signin(String name, String password,String email){
-//    	return userDao.signin(name, password, email);
-//    }
+    public boolean isExist(String name){
+    	return userDao.isExist(name);
+    }
+    public boolean signin(UserInfo user, UserPassword u){
+    	return userDao.signin(user,u);
+    }
 }
 
