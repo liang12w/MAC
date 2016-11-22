@@ -4,6 +4,7 @@ import utils.HttpRequestor;
 import java.util.HashMap;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping(value = "")
 public class Tests {
-	
     @RequestMapping(value = "loginAction", method = RequestMethod.POST)
     @ResponseBody
     public HashMap<String, Object> testLogin(String username, String password){
