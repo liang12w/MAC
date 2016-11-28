@@ -23,6 +23,13 @@
 
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
     
+    <mvc:interceptors>
+    	<mvc:interceptor>
+    		<mvc:mapping path="/views/**"/>
+    		<bean class="interceptor/DefaultInterceptor"/>
+    	</mvc:interceptor>
+    </mvc:interceptors>
+    
     <!-- 启动扫描所有的controller 只扫描mvc，不扫描service -->
     <context:component-scan base-package="/">
         <!-- 
@@ -30,6 +37,11 @@
         -->
     </context:component-scan> 
     
+    <bean id="viewResolver"
+              class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+              p:prefix="/"
+              p:suffix=".do"
+    />
 <!--    <mvc:default-servlet-handler />
     
     <mvc:resources mapping="/cms/**" location="/cms/" />
@@ -45,9 +57,4 @@
         <property name="contentType" value="text/html"></property>  
     </bean>-->
     
-    <bean id="viewResolver"
-              class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-              p:prefix="/"
-              p:suffix=".do"
-    />
 </beans>

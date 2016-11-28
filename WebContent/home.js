@@ -10,6 +10,7 @@ function init(){
 			if (data.errorCode==1) {
 				window.location.href = "login.html";
 			}else{
+				$.cookie("sid",{expires:7});
 				generateInfo(data.moments);
 			}
 		},

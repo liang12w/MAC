@@ -4,7 +4,7 @@ function submit(){
 			'username':$('#username').val(),
 			'password':$.md5($('#password').val())
 		};
-
+		var checked = $('checked').val();
 		$.ajax({
 			url:"http://localhost:8080/GIFme/loginAction.do",
 			type : "POST",
@@ -13,7 +13,11 @@ function submit(){
 			success:function(data){
 				console.info("data is "+data);
 				if (data.errorCode==0) {
-					$.cookie("sid",data.sid);
+					if(checked==true){
+						$.cookie("sid",data.sid,{expires:7});
+					}else{
+						$.cookie("sid",data.sid);						
+					}
 					window.location.href = "home.html";
 				}else{
 					alert(data.errorMsg);
