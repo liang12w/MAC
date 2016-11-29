@@ -1,5 +1,5 @@
 package controller;
-import utils.HttpRequestor;
+import utils.HttpUtils;
 
 import java.util.HashMap;
 
@@ -21,13 +21,18 @@ public class Tests {
     	return map; 
     }
     
-    @RequestMapping(value = "getGifAction", method = RequestMethod.POST)
-    public static void doHttpPost() {
+    @RequestMapping(value = "/views/getGifAction", method = RequestMethod.POST)
+    @ResponseBody
+    public HashMap<String, Object> doHttpPost() {
+    	HashMap<String, Object> map = new HashMap<String, Object>();
     	try {
-			System.out.println(new HttpRequestor().doPost("http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC", null));
+			System.out.println(HttpUtils.getHttpResult("http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC"));
+			map.put("errorCode", 0);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			map.put("errorCode", 1);
 		}
+    	return map;
     }
 }

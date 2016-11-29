@@ -25,11 +25,14 @@ function submit(){
 
 function getGif(){
 	$.ajax({
-		url:"http://localhost:8080/GIFme/getGifAction.do",
+		url:"http://localhost:8080/GIFme/views/getGifAction.do",
 		type:"POST",
 		dataType:"json",
+		data:{"sid":$.cookie('sid')},
 		success:function(data){
 			console.info(data);
 		},
 	});
 }
+
+// $(getGif)
