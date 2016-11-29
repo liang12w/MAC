@@ -26,7 +26,7 @@
     <mvc:interceptors>
     	<mvc:interceptor>
     		<mvc:mapping path="/views/**"/>
-    		<bean class="interceptor/DefaultInterceptor"/>
+    		<bean class="interceptor.DefaultInterceptor"/>
     	</mvc:interceptor>
     </mvc:interceptors>
     
