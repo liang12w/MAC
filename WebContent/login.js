@@ -18,7 +18,7 @@ function submit(){
 					}else{
 						$.cookie("sid",data.sid);						
 					}
-					window.location.href = "home.html";
+					window.location.href = "views/home.html";
 				}else{
 					alert(data.errorMsg);
 					window.location.href = "login.html";
