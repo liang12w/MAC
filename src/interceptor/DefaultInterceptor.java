@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import service.UserService;
+
 /**
  * @author Louis Liu
  * @date Create Date：Nov 28, 2016 6:38:31 PM
@@ -15,8 +17,13 @@ public class DefaultInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		System.out.println(request.getParameter("sid"));
-		response.getWriter().print("{\"errorCode\":-1,\"errorMsg\":\"Invalid user login inforamtion\"}");
-		return false;
+		UserService userService = new UserService();
+		if(userService.checkSid(request.getParameter("sid"))==true)
+			return true;
+		else{
+			response.getWriter().print("{\"errorCode\":-1,\"errorMsg\":\"Invalid user login inforamtion\"}");
+			return false;			
+		}
 		// return true;
 	}
 

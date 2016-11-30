@@ -18,10 +18,11 @@ function submit(){
 					}else{
 						$.cookie("sid",data.sid);						
 					}
-					window.location.href = "views/home.html";
+					window.location.href = "views/home2.html";
 				}else{
 					alert(data.errorMsg);
-					window.location.href = "login.html";
+					$('#password').val(null);
+//					window.location.href = "login.html";
 				}
 			},
 			error:function(XMLResponse){

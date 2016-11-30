@@ -1,19 +1,19 @@
-var params;
+var params = [];
 function init(){
 	// var sid = $.cookie('sid');
 	// console.info(sid);
 	if ($.cookie('sid')!=undefined) {
-		params.put('sid',$.cookie('sid'))
+		params.push({'sid':$.cookie('sid')});
 	};
 	$.ajax({
-		url:"http://localhost:8080/GIFme/validateAction.do",
+		url:"http://localhost:8080/GIFme/views/validateAction.do",
 		type:"text",
 		dataType:"json",
-		data:sid,
+		data:params,
 		success:function(data){
-			if (data.errorCode==1) {
+			if (data.errorCode==-1) {
 				window.location.href = "../login.html";
-			}else{
+			}else if(data.errorCode== 0){
 				$.cookie("sid",{expires:7});
 				generateInfo(data.moments);
 			}
@@ -26,17 +26,17 @@ $(init)
 function generateInfo(data){
 	var content = undefined;
 	for (var i = 0; i < data.length; i++) {
-		cont += "<article><div class='heading'><h2>"+data[i].motContent+"</h2></div>"+
+		cont += "<article id='"+data.motId+"'><div class='heading'><h2>"+data[i].motContent+"</h2></div>"+
 					"<div class='content'><img src='"+data[i].motGifUri+"' width='200px' height='200px' /></div>"+
 					"<div class='info'><p>By "+data[i].userInfo.usrName+" on "+data[i].motSentTime+
-					" - <a href='comment.html'>"+data[i].motCommentNum+" Commnets</a></p>"+
+					" - <a href='javascript:getComments('"+data.motId+"');' >"+data[i].motCommentNum+" Commnets</a></p>"+
 					"</div></article>";
 	};
 	$(".col-md-6").append(content);
 }
 
 function getComments(motId){
-	params.put('motId',motId);
+	params.push('motId',motId);
 	$.ajax({
 		url:"http://localhost:8080/GIFme/views/getCommentsAction.do",
 		type:"text",
@@ -59,8 +59,8 @@ function getComments(motId){
 }
 
 function submitComment(){
-	params.put("comment",undefined);//todo
-	params.put("motId",undefined);//todo
+	params.push("comment",undefined);//todo
+	params.push("motId",undefined);//todo
 	$.ajax({
 		url:"http://localhost:8080/GIFme/views/getCommentsAction.do",
 		type:"text",
