@@ -10,7 +10,7 @@ function doInit() {
 			"usrNickname" : usrNickname,
 			"username" : $("#username").val(),
 			"email" : $("#email").val(),
-			"gender":gender,
+//			"gender":gender,
 			"password" : $("#password").val()
 		}
 		for (var i in params) {
