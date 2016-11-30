@@ -2,9 +2,11 @@ package dao;
 
 import entities.UserInfo;
 import entities.UserPassword;
-
+import java.util.Date;
+import java.text.DateFormat;
 import java.util.Iterator;
 import java.util.List;
+
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -17,26 +19,37 @@ import org.springframework.stereotype.Repository;
 public class UserDao extends BaseDao {
   
   
-  public boolean check(UserInfo user, UserPassword u) {
+  public boolean check(String username, String password) {
       String hql = " SELECT FROM UserPassword u WHERE u.userpassword = ? WHERE u.userid = (SELECT user.userid FROM UserInfo user WHERE user.username = ?)";     
-      List list = getSession().createQuery(hql).setString(0, user.getUsrName()).setString(1, u.getUsrPwd()).list();
+      List list = getSession().createQuery(hql).setString(0, username).setString(1, password).list();
       if (list.isEmpty()==true) {
            return false;
+      }else{
+    	  UserInfo user = (UserInfo) list.get(0);
+		  user.setLastLogin(new Date());
+		  getSession().save(user);
+		  return true;
       }
-      return true;
   }
-  public boolean checkSid(UserInfo user){
+  public boolean checkSid(String sid){
 	  String hql = "FROM UserInfo e WHERE E.SECURITY_ID = ?";
-	  List list = getSession().createQuery(hql).setString(0,user.getSecurityId()).list();
+	  List list = getSession().createQuery(hql).setString(0,sid).list();
 	  if(list.isEmpty()==true){
 		  return false;
+	  }else{
+		  UserInfo user = (UserInfo) list.get(0);
+		  user.setLastLogin(new Date());
+		  getSession().save(user);
+		  return true;
 	  }
-	  return true;
+
   }
   public boolean signin(UserInfo user, UserPassword u) {
 	 
       System.out.println("Saving user Messages !");
       System.out.println(user);
+      Date now = new Date();
+      user.setFirstLogin(now);
       getSession().save(user); 
       this.savePassword(user, u);
 //    getSession().flush();

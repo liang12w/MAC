@@ -18,10 +18,10 @@ public class UserService {
     @Autowired
     public UserDao userDao;
     
-    public boolean check(UserInfo USER,UserPassword U){
-        return userDao.check(USER,U);
+    public boolean check(String username,String password){
+        return userDao.check(username,password);
     } 
-    public boolean checkSid(UserInfo Sid){
+    public boolean checkSid(String Sid){
     	return userDao.checkSid(Sid);
     }
     public boolean isExist(String name){

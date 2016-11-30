@@ -20,26 +20,26 @@ public class LoginController {
 
     @RequestMapping(value = "index", method = RequestMethod.POST)
     
-    public String loginid(ModelMap map, UserInfo user){
-    	if(this.checkParams(new String[]{user.getSecurityId()})){
-    		if(userService.checkSid(user)){
-    			map.put("Security_id",user.getSecurityId());
+    public String loginid(ModelMap map, String sid){
+    	if(this.checkParams(new String[]{sid})){
+    		if(userService.checkSid(sid)){
+    			map.put("Security_id",sid);
     			return "cms/index";
     		}
     		 return "cms/error";
     	}
     	return "cms/error";
     }
-    public String login(ModelMap map, UserInfo user, UserPassword u) {
+    public String login(ModelMap map, String username, String password) {
         //验证传递过来的参数是否正确，否则返回到登陆页面。
-        System.out.println(user);
-        if (this.checkParams(new String[]{user.getUsrName(), u.getUsrPwd()})) {
+        System.out.println(username);
+        if (this.checkParams(new String[]{username, password})) {
             //指定要返回的页面为succ.jsp
             //ModelAndView mav = new ModelAndView("redirect:succ");
             //将参数返回给页面
-            if (userService.check(user,u)) {
-                map.put("usrName", user.getUsrName());
-                map.put("usrPwd", u.getUsrPwd());
+            if (userService.check(username,password)) {
+                map.put("usrName", username);
+                map.put("usrPwd", password);
                 return "cms/index";
             }
         }
