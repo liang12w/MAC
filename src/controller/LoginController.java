@@ -58,5 +58,13 @@ public class LoginController {
         }
         return true;
     }
+    
+    @ResponseBody
+    @RequestMapping(value = "/views/validateAction", method = RequestMethod.POST)
+    public HashMap valid() {
+    	HashMap<String, Object> map = new HashMap<String, Object>();
+       map.put("errorCode", 0);
+       return map;
+    }
 }
 

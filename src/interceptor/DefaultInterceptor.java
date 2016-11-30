@@ -22,7 +22,7 @@ public class DefaultInterceptor implements HandlerInterceptor {
 			throws Exception {
 //		System.out.println(request.getParameter("sid"));
 		int usrId = userService.checkSid(request.getParameter("sid"));
-		if (usrId == -1){
+		if (usrId != -1){
 			request.setAttribute("usrId", usrId);
 			return true;			
 		}

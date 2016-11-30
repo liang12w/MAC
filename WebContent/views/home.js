@@ -7,21 +7,30 @@ function init(){
 	};
 	$.ajax({
 		url:"http://localhost:8080/GIFme/views/validateAction.do",
-		type:"text",
+		type:"POST",
 		dataType:"json",
-		data:params,
+		data:{'sid':$.cookie('sid')},
 		success:function(data){
 			if (data.errorCode==-1) {
-				window.location.href = "../login.html";
-			}else if(data.errorCode== 0){
-				$.cookie("sid",{expires:7});
-				generateInfo(data.moments);
-			}else{
 				alert(data.errorMsg);
 				window.location.href = "../login.html";
 			}
 		},
 	});
+	// $.ajax({
+	// 	url:"http://localhost:8080/GIFme/views/getMomentsAction.do",
+	// 	type:"POST",
+	// 	dataType:"json",
+	// 	data:params,
+	// 	success:function(data){
+	// 		if(data.errorCode== 0){
+	// 			generateInfo(data.moments);
+	// 		}else{
+	// 			alert(data.errorMsg);
+	// 			window.location.reload();
+	// 		}
+	// 	},
+	// });
 }
 
 $(init)
@@ -65,7 +74,7 @@ function submitComment(){
 	params.push("comment",undefined);//todo
 	params.push("motId",undefined);//todo
 	$.ajax({
-		url:"http://localhost:8080/GIFme/views/getCommentsAction.do",
+		url:"http://localhost:8080/GIFme/views/submitCommentsAction.do",
 		type:"text",
 		dataType:"json",
 		data:params,

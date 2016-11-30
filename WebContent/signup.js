@@ -50,9 +50,8 @@ function doInit() {
 			type:"POST",
 			success : function(data) {
 				if (data.errorCode == 0) {
-					alert("Sign up successed.", function() {
-						window.location.href = "login.html";
-					});
+					alert("Sign up successed.");
+					window.location.href = "login.html";
 				} else {
 					alert(data.errorMsg);
 				}

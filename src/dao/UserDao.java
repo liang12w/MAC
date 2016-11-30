@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 public class UserDao extends BaseDao {
 
 	public static final String KEY_MD5 = "MD5";
+	public static final char hexDigits[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
 
 	public boolean check(String username, String password) {
 		String hql1 = "FROM UserInfo user WHERE user.usrName = ?";
@@ -21,13 +22,13 @@ public class UserDao extends BaseDao {
 		if (list.isEmpty() == true) {
 			return false;
 		}
-		
+
 		UserInfo user = (UserInfo) list.get(0);
 		list = getSession().createQuery(hql2).setString(0, password).setInteger(1, user.getUsrId()).list();
 		if (list.isEmpty() == true) {
 			return false;
 		}
-		
+
 		user.setLastLogin(new Date());
 		getSession().save(user);
 		return true;
@@ -88,11 +89,22 @@ public class UserDao extends BaseDao {
 		try {
 			md5 = MessageDigest.getInstance(KEY_MD5);
 			md5.update(user);
+			byte[] md = md5.digest();
+			int j = md.length;
+			char str[] = new char[j * 2];
+			int k = 0;
+			for (int i = 0; i < j; i++) {
+				byte byte0 = md[i];
+				str[k++] = hexDigits[byte0 >>> 4 & 0xf];
+				str[k++] = hexDigits[byte0 & 0xf];
+			}
+			return new String(str);
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
-		return md5.digest().toString();
+		// return md5.digest().toString();
 	}
 
 	public boolean isExist(String name) {

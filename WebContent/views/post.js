@@ -1,3 +1,18 @@
+function validate(){
+	$.ajax({
+		url:"http://localhost:8080/GIFme/views/validateAction.do",
+		type:"POST",
+		dataType:"json",
+		data:{"sid":$.cookie('sid')}, 
+		success:function(data){
+			if (data.errorCode==-1) {
+				alert(data.errorMsg);
+				window.location.href = '../login.html';
+			};
+		},
+	});
+}
+
 function submit(){
 	params = {
 		'sid':$.cookie('sid'),
@@ -35,4 +50,4 @@ function getGif(){
 	});
 }
 
- $(getGif)
+ $(validate)
