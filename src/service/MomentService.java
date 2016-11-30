@@ -2,8 +2,7 @@ package service;
 
 public class MomentService {
 
-	public MomentService() {
-		// TODO Auto-generated constructor stub
+	public boolean saveContent(String content,int id){
+		return true;
 	}
-
 }
