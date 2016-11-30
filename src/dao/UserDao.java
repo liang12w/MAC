@@ -3,6 +3,7 @@ package dao;
 import entities.UserInfo;
 import entities.UserPassword;
 import java.util.Date;
+import java.security.MessageDigest;
 import java.text.DateFormat;
 import java.util.Iterator;
 import java.util.List;
@@ -18,7 +19,7 @@ import org.springframework.stereotype.Repository;
 @Repository("userDao")
 public class UserDao extends BaseDao {
   
-  
+  public static final String KEY_MD5 = "MD5"; 
   public boolean check(String username, String password) {
       String hql = " SELECT FROM UserPassword u WHERE u.usrPwd = ? WHERE u.usrId = (SELECT user.usrId FROM UserInfo user WHERE user.usrName = ?)";     
       List list = getSession().createQuery(hql).setString(0, username).setString(1, password).list();
@@ -60,7 +61,21 @@ public class UserDao extends BaseDao {
 	 getSession().save(u);
 	  
   }
-  
+  /** 
+   * MD5加密 
+   *  
+   * @param data 
+   * @return 
+   * @throws Exception 
+   */  
+  public static String sercurity(String userName) throws Exception {  
+	
+	  byte[] user =  userName.getBytes();
+      MessageDigest md5 = MessageDigest.getInstance(KEY_MD5);  
+      md5.update(user);  
+      return md5.digest().toString();  
+  }  
+
   public boolean isExist(String name){
      
 	  String hql = " SELECT FROM  UserInfo user WHERE user.usrName = ?)";     

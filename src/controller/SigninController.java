@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import entities.UserInfo;
 import entities.UserPassword;
-
+@Controller
+@RequestMapping(value = "")
 public class SigninController {
 	
 	    public UserService userService;
