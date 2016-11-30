@@ -15,7 +15,7 @@ import entities.UserPassword;
 @RequestMapping(value = "")
 public class LoginController {
 	
-    @Autowired
+	@Autowired
     public UserService userService;
 
     @RequestMapping(value = "index", method = RequestMethod.POST)

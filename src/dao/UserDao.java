@@ -84,7 +84,7 @@ public class UserDao extends BaseDao {
 
   public boolean isExist(String name){
      
-	  String hql = " SELECT FROM  UserInfo user WHERE user.usrName = ?)";     
+	  String hql = "FROM  UserInfo user WHERE user.usrName = ?)";     
       List list = getSession().createQuery(hql).list();
       if (list.isEmpty()==true) {
            return false;

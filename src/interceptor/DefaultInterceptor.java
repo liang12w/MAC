@@ -18,11 +18,11 @@ public class DefaultInterceptor implements HandlerInterceptor {
 			throws Exception {
 		System.out.println(request.getParameter("sid"));
 		UserService userService = new UserService();
-		if(userService.checkSid(request.getParameter("sid"))==true)
+		if (userService.checkSid(request.getParameter("sid")) == true)
 			return true;
-		else{
+		else {
 			response.getWriter().print("{\"errorCode\":-1,\"errorMsg\":\"Invalid user login inforamtion\"}");
-			return false;			
+			return false;
 		}
 		// return true;
 	}

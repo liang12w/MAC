@@ -9,19 +9,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import entities.UserInfo;
 import entities.UserPassword;
+
 @Controller
 @RequestMapping(value = "")
 public class SigninController {
-    @Autowired
-	    public UserService userService;
-	    @RequestMapping(value = "signupAction", method = RequestMethod.POST)
-	    public boolean signin(UserInfo user,UserPassword u){
-	    	if(!userService.isExist(user.getUsrName())){
-	    		return userService.signUp(user,u);
-	    	}else{
-	    		return false;//提示名字重复
-	    	}
-	    }
-	    
-	    
+	@Autowired
+	public UserService userService;
+
+	@RequestMapping(value = "signupAction", method = RequestMethod.POST)
+	public boolean signin(UserInfo user, UserPassword u) {
+		if (!userService.isExist(user.getUsrName())) {
+			return userService.signUp(user, u);
+		} else {
+			return false;// 提示名字重复
+		}
+	}
+
 }
