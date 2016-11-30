@@ -1,6 +1,9 @@
 package controller;
 
 import service.UserService;
+
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,17 +23,24 @@ public class LoginController {
 
     @RequestMapping(value = "index", method = RequestMethod.POST)
     
-    public String loginid(ModelMap map, String sid){
+    public HashMap loginid( String sid){
+    	HashMap<String, Object> map = new HashMap<String, Object>();
     	if(this.checkParams(new String[]{sid})){
     		if(userService.checkSid(sid)){
-    			map.put("Security_id",sid);
-    			return "cms/index";
+    			
+    			map.put("errorCode", 0);
+    			return map;
     		}
-    		 return "cms/error";
+    		map.put("errorCode", 1);
+    		map.put("errorMsg", "error security id" );
+    		return map;
     	}
-    	return "cms/error";
+    	map.put("errorCode", 1);
+    	map.put("errorMsg", "error security id");
+    	return map;
     }
-    public String login(ModelMap map, String username, String password) {
+    public HashMap login(String username, String password) {
+    	HashMap<String, Object> map = new HashMap<String, Object>();
         //验证传递过来的参数是否正确，否则返回到登陆页面。
         System.out.println(username);
         if (this.checkParams(new String[]{username, password})) {
@@ -38,12 +48,14 @@ public class LoginController {
             //ModelAndView mav = new ModelAndView("redirect:succ");
             //将参数返回给页面
             if (userService.check(username,password)) {
-                map.put("usrName", username);
-                map.put("usrPwd", password);
-                return "cms/index";
+                
+                map.put("errorCode", 0);
+                return map;
             }
         }
-        return "cms/error";
+       map.put("errorCode", 1);
+       map.put("errorMsg", "wrong username or password");
+       return map;
     }
 
     /**
