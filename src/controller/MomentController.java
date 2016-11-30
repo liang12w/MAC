@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MomentController {
 
 	@Autowired
-	public void sendMoment(){
+	public void sendMoment(String motContent){
 		
 	}
 

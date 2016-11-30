@@ -45,7 +45,7 @@ public class UserDao extends BaseDao {
 	  }
 
   }
-  public boolean signUp (UserInfo user, UserPassword u) {
+  public boolean signUp (UserInfo user) {
 	 
       System.out.println("Saving user Messages !");
       System.out.println(user);
@@ -58,13 +58,14 @@ public class UserDao extends BaseDao {
 		e.printStackTrace();
 	}
       getSession().save(user); 
-      this.savePassword(user, u);
+ 
 //    getSession().flush();
       return true;
   }
-  public void savePassword(UserInfo user, UserPassword u){
+  public boolean savePassword(UserInfo user, UserPassword u){
 	 u.setUsrId(user.getUsrId());
 	 getSession().save(u);
+	 return true;
 	  
   }
   /** 

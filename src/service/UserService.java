@@ -27,8 +27,11 @@ public class UserService {
     public boolean isExist(String name){
     	return userDao.isExist(name);
     }
-    public boolean signUp(UserInfo user, UserPassword u){
-    	return userDao.signUp(user,u);
+    public boolean signUp(UserInfo user){
+    	return userDao.signUp(user);
+    }
+    public boolean savePassword(UserInfo user,UserPassword u){
+    	return userDao.savePassword(user, u);
     }
 }
 
