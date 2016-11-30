@@ -20,7 +20,7 @@ public class UserDao extends BaseDao {
   
   
   public boolean check(String username, String password) {
-      String hql = " SELECT FROM UserPassword u WHERE u.userpassword = ? WHERE u.userid = (SELECT user.userid FROM UserInfo user WHERE user.username = ?)";     
+      String hql = " SELECT FROM UserPassword u WHERE u.usrPwd = ? WHERE u.usrId = (SELECT user.usrId FROM UserInfo user WHERE user.usrName = ?)";     
       List list = getSession().createQuery(hql).setString(0, username).setString(1, password).list();
       if (list.isEmpty()==true) {
            return false;
@@ -63,7 +63,7 @@ public class UserDao extends BaseDao {
   
   public boolean isExist(String name){
      
-	  String hql = " SELECT FROM  UserInfo user WHERE user.username = ?)";     
+	  String hql = " SELECT FROM  UserInfo user WHERE user.usrName = ?)";     
       List list = getSession().createQuery(hql).list();
       if (list.isEmpty()==true) {
            return false;
