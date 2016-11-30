@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import entities.UserInfo;
 import entities.UserPassword;
@@ -21,6 +22,7 @@ public class LoginController {
 	@Autowired
     public UserService userService;
 
+	@ResponseBody
     @RequestMapping(value = "index", method = RequestMethod.POST)
     
     public HashMap loginid( String sid){

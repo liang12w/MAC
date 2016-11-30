@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import entities.UserInfo;
 import entities.UserPassword;
@@ -19,6 +20,7 @@ public class SigninController {
 	@Autowired
 	public UserService userService;
 
+	@ResponseBody
 	@RequestMapping(value = "signupAction", method = RequestMethod.POST)
 	public HashMap signin(String username, String usrNickname, String email, String password) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
