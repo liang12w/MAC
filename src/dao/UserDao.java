@@ -32,7 +32,7 @@ public class UserDao extends BaseDao {
       }
   }
   public boolean checkSid(String sid){
-	  String hql = "FROM UserInfo e WHERE E.SECURITY_ID = ?";
+	  String hql = "FROM UserInfo e WHERE e.securityId = ?";
 	  List list = getSession().createQuery(hql).setString(0,sid).list();
 	  if(list.isEmpty()==true){
 		  return false;

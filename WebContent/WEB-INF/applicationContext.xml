@@ -67,7 +67,7 @@
 	
     <!-- 3. 配置事务切入点, 再把事务属性和事务切入点关联起来 -->
     <aop:config>
-        <aop:pointcut expression="execution(* com.service.*.*(..))" id="txPointcut"/>
+        <aop:pointcut expression="execution(* service.*.*(..)) "  id="txPointcut"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
     </aop:config>
     
