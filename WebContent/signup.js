@@ -5,10 +5,9 @@ function doInit() {
 			if (radios[i].checked)
 				var gender = radios[i].value;
 		}
-
+		var usrNickname = $("#first_name").val()+"$"+$("#last_name").val();
 		var params = {
-			"first_name" : $("#first_name").val(),
-			"last_name" : $("#last_name").val(),
+			"usrNickname" : usrNickname,
 			"username" : $("#username").val(),
 			"email" : $("#email").val(),
 			"gender":gender,
@@ -31,23 +30,24 @@ function doInit() {
 			return;
 		}
 
-		var checkUrl = "checkUsernameAction.do";
-		var submitUrl = "SaveUserInfoAction.do";
-		$.ajax({
-			url : checkUrl,
-			data : params["username"],
-			success : function(data) {
-				if (data.errorCode == 1) {
-					alert("Username is existed.");
-					// alert(data.errorMsg);
-					return;
-				} 
-			}
-		});
+		// var checkUrl = "checkUsernameAction.do";
+		var submitUrl = "signupAction.do";
+		// $.ajax({
+		// 	url : checkUrl,
+		// 	data : params["username"],
+		// 	success : function(data) {
+		// 		if (data.errorCode == 1) {
+		// 			alert("Username is existed.");
+		// 			// alert(data.errorMsg);
+		// 			return;
+		// 		} 
+		// 	}
+		// });
 
 		$.ajax({
 			url : submitUrl,
 			data : params,
+			type:"POST",
 			success : function(data) {
 				if (data.errorCode == 0) {
 					alert("Sign up successed.", function() {

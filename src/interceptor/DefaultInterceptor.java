@@ -3,6 +3,7 @@ package interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,11 +14,13 @@ import service.UserService;
  * @date Create Date：Nov 28, 2016 6:38:31 PM
  **/
 public class DefaultInterceptor implements HandlerInterceptor {
+	@Autowired
+    public UserService userService;
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		System.out.println(request.getParameter("sid"));
-		UserService userService = new UserService();
 		if (userService.checkSid(request.getParameter("sid")) == true)
 			return true;
 		else {

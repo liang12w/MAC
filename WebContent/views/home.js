@@ -16,6 +16,9 @@ function init(){
 			}else if(data.errorCode== 0){
 				$.cookie("sid",{expires:7});
 				generateInfo(data.moments);
+			}else{
+				alert(data.errorMsg);
+				window.location.href = "../login.html";
 			}
 		},
 	});
