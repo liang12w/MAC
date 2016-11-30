@@ -5,9 +5,9 @@ function doInit() {
 			if (radios[i].checked)
 				var gender = radios[i].value;
 		}
-		var usrNickname = $("#first_name").val()+"$"+$("#last_name").val();
+		var nickname = $("#first_name").val()+"$"+$("#last_name").val();
 		var params = {
-			"usrNickname" : usrNickname,
+			"nickname" : nickname,
 			"username" : $("#username").val(),
 			"email" : $("#email").val(),
 //			"gender":gender,
