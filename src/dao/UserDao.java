@@ -45,12 +45,18 @@ public class UserDao extends BaseDao {
 	  }
 
   }
-  public boolean signin(UserInfo user, UserPassword u) {
+  public boolean signUp (UserInfo user, UserPassword u) {
 	 
       System.out.println("Saving user Messages !");
       System.out.println(user);
       Date now = new Date();
       user.setFirstLogin(now);
+      try {
+		user.setSecurityId(UserDao.genSid(user.getUsrName()));
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
       getSession().save(user); 
       this.savePassword(user, u);
 //    getSession().flush();
@@ -68,7 +74,7 @@ public class UserDao extends BaseDao {
    * @return 
    * @throws Exception 
    */  
-  public static String sercurity(String userName) throws Exception {  
+  public static String genSid(String userName) throws Exception {  
 	
 	  byte[] user =  userName.getBytes();
       MessageDigest md5 = MessageDigest.getInstance(KEY_MD5);  

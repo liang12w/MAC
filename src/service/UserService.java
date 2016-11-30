@@ -27,8 +27,8 @@ public class UserService {
     public boolean isExist(String name){
     	return userDao.isExist(name);
     }
-    public boolean signin(UserInfo user, UserPassword u){
-    	return userDao.signin(user,u);
+    public boolean signUp(UserInfo user, UserPassword u){
+    	return userDao.signUp(user,u);
     }
 }
 

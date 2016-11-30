@@ -17,7 +17,7 @@ public class SigninController {
 	    @RequestMapping(value = "signin", method = RequestMethod.POST)
 	    public boolean signin(UserInfo user,UserPassword u){
 	    	if(!userService.isExist(user.getUsrName())){
-	    		return userService.signin(user,u);
+	    		return userService.signUp(user,u);
 	    	}else{
 	    		return false;//提示名字重复
 	    	}
