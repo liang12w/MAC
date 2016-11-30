@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.Date;
 import java.util.List;
 
 import entities.Moments;
@@ -17,6 +18,7 @@ public class MomentDao extends BaseDao {
 			user = (UserInfo) list.get(0);
 			moment.setUserInfo(user);
 			moment.setMotContent(content);
+			moment.setMotSentTime(new Date());
 			getSession().save(moment);
 			return true;
 		}

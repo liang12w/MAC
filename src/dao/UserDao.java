@@ -66,6 +66,7 @@ public class UserDao extends BaseDao {
 	 u.setUsrId(user.getUsrId());
 	 u.setUserInfo(user);
 	 getSession().save(u);
+	 getSession().flush();
 	 return true;
 	  
   }
