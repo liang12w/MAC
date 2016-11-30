@@ -14,9 +14,14 @@ public class MomentDao extends BaseDao {
 		String hql = "FROM UserInfo e WHERE e.usrId= ?";
 		List list = getSession().createQuery(hql).setInteger(0, id).list();
 		if(!list.isEmpty()){
-//			moment = (Moments)list.get(0).setMotContent(content);
+			user = (UserInfo) list.get(0);
+			moment.setUserInfo(user);
+			moment.setMotContent(content);
+			getSession().save(moment);
+			return true;
 		}
-		return true;
+		return false;
+	
 	}
 
 	public void genGif(){

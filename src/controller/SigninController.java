@@ -38,7 +38,7 @@ public class SigninController {
 			map.put("errorCode", 0);
 			return map;
 		} else {
-			map.put("errorCode", 0);
+			map.put("errorCode", 1);
 			map.put("errorMsg", "user name exists");
 			return map;// 提示名字重复
 		}
