@@ -1,6 +1,9 @@
 package controller;
 
 import service.UserService;
+
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,22 +20,25 @@ public class SigninController {
 	public UserService userService;
 
 	@RequestMapping(value = "signupAction", method = RequestMethod.POST)
-	public boolean signin(String username, String usrNickname, String email, String password) {
-		UserInfo user = new UserInfo();
-		UserPassword u = new UserPassword();
-		user.setUsrName(username);
-		user.setUsrNickname(usrNickname);
-		user.setUsrEmail(email);
-
-		if (!userService.isExist(user.getUsrName())) {
+	public HashMap signin(String username, String usrNickname, String email, String password) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		if (!userService.isExist(username)) {
+			UserInfo user = new UserInfo();
+			UserPassword u = new UserPassword();
+			user.setUsrName(username);
+			user.setUsrNickname(usrNickname);
+			user.setUsrEmail(email);
 			if (userService.signUp(user)) {
 				u.setUsrId(user.getUsrId());
 				u.setUsrPwd(password);
 				userService.savePassword(user, u);
 			}
-			return true;
+			map.put("errorCode", 0);
+			return map;
 		} else {
-			return false;// 提示名字重复
+			map.put("errorCode", 0);
+			map.put("errorMsg", "user name exists");
+			return map;// 提示名字重复
 		}
 	}
 
