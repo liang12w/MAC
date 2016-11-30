@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import entities.Moments;
+import service.MomentService;
 
 //@Controller
 //@RequestMapping(value = "")
@@ -12,9 +13,8 @@ public class MomentController {
 
 //	@Autowired
 	public void sendMoment(String motContent,int id){
-		Moments moment = new Moments();
-		moment.setMotId(id);
-		moment.setMotContent(motContent);
+		MomentService momentservice = new MomentService();
+	    momentservice.saveContent(motContent,id);
 	}
 
 }

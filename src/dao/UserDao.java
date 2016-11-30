@@ -64,6 +64,7 @@ public class UserDao extends BaseDao {
   }
   public boolean savePassword(UserInfo user, UserPassword u){
 	 u.setUsrId(user.getUsrId());
+	 u.setUserInfo(user);
 	 getSession().save(u);
 	 return true;
 	  
