@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(value = "")
 public class Tests {
 	
-    @RequestMapping(value = "loginAction", method = RequestMethod.POST)
-    @ResponseBody
-    public HashMap<String, Object> testLogin(String username, String password){
-    	HashMap<String, Object> map = new HashMap<String, Object>();
-    	map.put("sid", password);
-    	map.put("errorCode", 0);
-    	return map; 
-    }
+//    @RequestMapping(value = "loginAction", method = RequestMethod.POST)
+//    @ResponseBody
+//    public HashMap<String, Object> testLogin(String username, String password){
+//    	HashMap<String, Object> map = new HashMap<String, Object>();
+//    	map.put("sid", password);
+//    	map.put("errorCode", 0);
+//    	return map; 
+//    }
     
     @RequestMapping(value = "/views/getGifAction", method = RequestMethod.POST)
     @ResponseBody

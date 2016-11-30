@@ -21,7 +21,7 @@ public class UserService {
     public boolean check(String username,String password){
         return userDao.check(username,password);
     } 
-    public boolean checkSid(String Sid){
+    public int checkSid(String Sid){
     	return userDao.checkSid(Sid);
     }
     public boolean isExist(String name){
@@ -32,6 +32,9 @@ public class UserService {
     }
     public boolean savePassword(UserInfo user,UserPassword u){
     	return userDao.savePassword(user, u);
+    }
+    public static String genSid(String userName){
+    	return UserDao.genSid(userName);
     }
 }
 

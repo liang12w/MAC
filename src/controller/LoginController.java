@@ -23,24 +23,7 @@ public class LoginController {
     public UserService userService;
 
 	@ResponseBody
-    @RequestMapping(value = "index", method = RequestMethod.POST)
-    
-    public HashMap loginid( String sid){
-    	HashMap<String, Object> map = new HashMap<String, Object>();
-    	if(this.checkParams(new String[]{sid})){
-    		if(userService.checkSid(sid)){
-    			
-    			map.put("errorCode", 0);
-    			return map;
-    		}
-    		map.put("errorCode", 1);
-    		map.put("errorMsg", "error security id" );
-    		return map;
-    	}
-    	map.put("errorCode", 1);
-    	map.put("errorMsg", "error security id");
-    	return map;
-    }
+    @RequestMapping(value = "loginAction", method = RequestMethod.POST)
     public HashMap login(String username, String password) {
     	HashMap<String, Object> map = new HashMap<String, Object>();
         //验证传递过来的参数是否正确，否则返回到登陆页面。
@@ -50,8 +33,8 @@ public class LoginController {
             //ModelAndView mav = new ModelAndView("redirect:succ");
             //将参数返回给页面
             if (userService.check(username,password)) {
-                
                 map.put("errorCode", 0);
+                map.put("sid", UserService.genSid(username));
                 return map;
             }
         }

@@ -20,9 +20,12 @@ public class DefaultInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		System.out.println(request.getParameter("sid"));
-		if (userService.checkSid(request.getParameter("sid")) == true)
-			return true;
+//		System.out.println(request.getParameter("sid"));
+		int usrId = userService.checkSid(request.getParameter("sid"));
+		if (usrId == -1){
+			request.setAttribute("usrId", usrId);
+			return true;			
+		}
 		else {
 			response.getWriter().print("{\"errorCode\":-1,\"errorMsg\":\"Invalid user login inforamtion\"}");
 			return false;
