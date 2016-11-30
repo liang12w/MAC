@@ -17,11 +17,11 @@ public class SigninController {
 	public UserService userService;
 
 	@RequestMapping(value = "signupAction", method = RequestMethod.POST)
-	public boolean signin(String userName, String nickname, String email,String password) {
+	public boolean signin(String username, String usrNickname, String email,String password) {
 		UserInfo user = new UserInfo();
 		UserPassword u = new UserPassword();
-		user.setUsrName(userName);
-		user.setUsrNickname(nickname);
+		user.setUsrName(username);
+		user.setUsrNickname(usrNickname);
 		user.setUsrEmail(email);
 		u.setUsrId(user.getUsrId());
 		u.setUsrPwd(password);
