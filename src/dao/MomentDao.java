@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-
+import controller.MomentController;
 import entities.Moments;
 import entities.UserInfo;
 import net.sf.json.JSONArray;
@@ -16,7 +16,7 @@ import net.sf.json.util.JSONTokener;
 import utils.HttpUtils;
 @Repository("momentDao")
 public class MomentDao extends BaseDao {
-
+	MomentController momentcontroller = new MomentController();
 	UserInfo user = new UserInfo();
 	Moments moment = new Moments();
 	UserDao ud = new UserDao();
@@ -31,6 +31,7 @@ public class MomentDao extends BaseDao {
 			moment.setMotSentTime(date);
 			Date vdate = MomentDao.getVanishTime(date);
 			moment.setMotVanishTime(vdate);
+			momentcontroller.watson(moment);
 			getSession().save(moment);
 			return true;
 		}
