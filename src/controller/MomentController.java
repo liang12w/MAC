@@ -43,7 +43,7 @@ public class MomentController {
 	}
 	@RequestMapping(value = "WatsonService", method = RequestMethod.POST)
 	@ResponseBody
-	public String WatsonService(String content) {
+	public Map<String, Object> WatsonService(String content) {
 		AlchemyLanguage service = new AlchemyLanguage();
 		service.setApiKey("cf12a4426504285e2a30fcebd1933f4c133141a7");
 
@@ -58,9 +58,11 @@ public class MomentController {
 	    String url = genGif(keyword);
 	    String type = entity.getString("type");
 //	    System.out.println("text is "+keyword+" type is "+ type);
-	    return url;
-//		map.put("errorCode", 0);
-//		return map;
+//	    return url;
+	    map.remove(AlchemyLanguage.TEXT);
+		map.put("errorCode", 0);
+		map.put("url", url);
+		return map;
 	}
 	public String genGif(String keyword){
 //		JSONArray jsonArray = (JSONArray) JSON.parse(HttpUtils.getHttpResult("http://api.giphy.com/v1/gifs/search?q="+keyword+"&api_key=dc6zaTOxFJmzC"));
