@@ -49,14 +49,16 @@ public class MomentController {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 	    map.put(AlchemyLanguage.TEXT, content);
-	    
+	    String keyword = null;
 	    Entities entities = service.getEntities(map).execute();
 //	    System.out.println("Entities: " + entities);
-	    JSONArray array = JSON.parseArray(entities.getEntities().toString());
-	    JSONObject entity = array.getJSONObject(0);
-	    String keyword = entity.getString("text");
-	    if(keyword == null || keyword == ""){
+	    String tem = entities.getEntities().toString();
+	    if(tem == null || tem ==""){
 	    	keyword = "sky";
+	    }else{
+	    JSONArray array = JSON.parseArray(tem);
+	    JSONObject entity = array.getJSONObject(0);
+	        keyword = entity.getString("text");
 	    }
 	    String url = genGif(keyword);
 //	    String type = entity.getString("type");
