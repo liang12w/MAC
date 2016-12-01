@@ -17,11 +17,12 @@ public class MomentService {
 		momentdao.saveContent(content,id);
 		return true;
 	}
-	public List showAllMoment(){
-		return momentdao.showAllMoment();
+	public List showAllMoment(int id){
+		return momentdao.showAllMoment(id);
 	}
 	public List showOwnMoment(int id){
 		
 		return momentdao.showOwnMoment(id);
 	}
+	
 }

@@ -116,7 +116,13 @@ public class UserDao extends BaseDao {
 		}
 		return true;
 	}
-	public void refreshTime(){
+	public  void refreshTime(int id){
+		String hql1 = "FROM UserInfo user WHERE user.usrName = ?";
+		List list = getSession().createQuery(hql1).setLong(0, id).list();
+		if(list.isEmpty()!=true){
+			UserInfo tem = (UserInfo) list.get(0);
+			tem.setLastLogin(new Date());
+		}
 		
 	}
 }

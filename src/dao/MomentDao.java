@@ -6,16 +6,20 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.ibm.watson.developer_cloud.alchemy.v1.AlchemyLanguage;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 
 import entities.Moments;
 import entities.UserInfo;
+import net.sf.json.JSONArray;
+import net.sf.json.util.JSONTokener;
 import utils.HttpUtils;
 @Repository("momentDao")
 public class MomentDao extends BaseDao {
 
 	UserInfo user = new UserInfo();
 	Moments moment = new Moments();
+	UserDao ud = new UserDao();
 	public boolean saveContent(String content, int id) {
 		String hql = "FROM UserInfo e WHERE e.usrId= ?";
 		List list = getSession().createQuery(hql).setInteger(0, id).list();
@@ -47,18 +51,10 @@ public class MomentDao extends BaseDao {
 		return true;
 		
 	}
-	public void getKeyWord(){
-		AlchemyLanguage service = new AlchemyLanguage();
-		service.setApiKey("cf12a4426504285e2a30fcebd1933f4c133141a7");
-		
-	}
+	
 
-	public String genGif(String keyword){
-		String url = null;
-		url = HttpUtils.getHttpResult("http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC");
-		return url;
-	}
-	public List showAllMoment(){
+	
+	public List showAllMoment(int id){
 		Date now = new Date();
 		String hql = "select motContent,motGifUri,userInfo,motLikeNum,motCommentNum from Moments where rownum > (select count(*) - 15)";
 		List list = getSession().createQuery(hql).list();
@@ -68,7 +64,7 @@ public class MomentDao extends BaseDao {
 				list.remove(i);
 			}
 		}
-		
+		ud.refreshTime(id);
 		return list;
 	}
 	public List showOwnMoment(int id){
@@ -82,7 +78,7 @@ public class MomentDao extends BaseDao {
 				list.remove(i);
 			}
 		}
-		
+		ud.refreshTime(id);
 		return list;
 	}
 	
