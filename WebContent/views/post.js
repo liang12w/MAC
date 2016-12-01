@@ -41,10 +41,10 @@ function submit(){
 function getGif(){
 	params = {
 		'sid':$.cookie('sid'),
-		'content':$('content').val()
+		'content':$('#content').val()
 	}
 	$.ajax({
-		url:"http://localhost:8080/GIFme/getGifAction.do",
+		url:"http://localhost:8080/GIFme/WatsonService.do",
 		type:"POST",
 		dataType:"json",
 		data:params, 

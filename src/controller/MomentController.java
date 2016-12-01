@@ -74,7 +74,7 @@ public class MomentController {
 		JSONArray data  = JSON.parseArray(json.getString("data"));
 		Random random = new Random();  
 		int index = random.nextInt(10);
-		String url = JSON.parseObject(JSON.parseObject(data.getString(index)).getString("images")).getString("url");
+		String url = JSON.parseObject(data.getString(index)).getJSONObject("images").getJSONObject("downsized").getString("url");
 		return url;
 	}
 	
