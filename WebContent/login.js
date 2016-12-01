@@ -18,7 +18,7 @@ function submit(){
 					}else{
 						$.cookie("sid",data.sid);						
 					}
-					window.location.href = "views/home2.html";
+					window.location.href = "views/home.html";
 				}else{
 					alert(data.errorMsg);
 					$('#password').val(null);
