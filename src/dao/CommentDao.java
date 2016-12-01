@@ -1,5 +1,8 @@
 package dao;
 
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import entities.Comments;
@@ -33,9 +36,13 @@ public class CommentDao extends BaseDao{
 	public List showAllComments(int motId){
 		String hql = "select comtContent, comtTime, userInfo FROM Moments e WHERE e.motId = ?";
 		List list = getSession().createQuery(hql).list();
-		for(int i = 0; i < list.size(); i++){
-			comment = (Comments) list.get(i);
+//		for(int i = 0; i < list.size(); i++){
+//			comment = (Comments) list.get(i);
+//		}
+		if(!list.isEmpty()){
+			return list;
 		}
+		return null;
 	}
 	
 	public boolean deleteComments(int motId, int comtId){
@@ -57,7 +64,7 @@ public class CommentDao extends BaseDao{
 			comment.setComtContent(content);
 			Date date = new Date();
 			comment.setComtTime(date);
-			getSession().save(moment);
+			getSession().save(comment);
 		return true;
 		} else
 			return false;
