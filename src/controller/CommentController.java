@@ -24,7 +24,7 @@ public class CommentController {
 			map.put("errorCode", 1);
 			map.put("errorMsg", "Error! Cannot add comment.");
 		}
-		map.put("errorCode", 1);
+		map.put("errorCode", 0);
 		return map;
 	}
 
@@ -34,7 +34,7 @@ public class CommentController {
 			map.put("errorCode", 1);
 			map.put("errorMsg", "Error! Cannot delete comment.");
 		}
-		map.put("errorCode", 1);
+		map.put("errorCode", 0);
 		return map;
 	}
 	
@@ -54,7 +54,7 @@ public class CommentController {
 			map.put("errorCode", 1);
 			map.put("errorMsg", "Error! Cannot modify comment.");
 		}
-		map.put("errorCode", 1);
+		map.put("errorCode", 0);
 		return map;
 	}
 }
