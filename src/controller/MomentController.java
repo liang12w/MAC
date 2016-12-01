@@ -3,6 +3,7 @@ package controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.ibm.watson.developer_cloud.alchemy.v1.AlchemyLanguage;
 import com.ibm.watson.developer_cloud.alchemy.v1.model.Entities;
 
+import apple.laf.JRSUIUtils.Images;
 import entities.Moments;
 import service.MomentService;
 import utils.HttpUtils;
@@ -57,15 +59,22 @@ public class MomentController {
 	    String keyword = entity.getString("text");
 	    String url = genGif(keyword);
 	    String type = entity.getString("type");
-	    System.out.println("text is "+keyword+" type is "+ type);
+//	    System.out.println("text is "+keyword+" type is "+ type);
 	    return url;
 //		map.put("errorCode", 0);
 //		return map;
 	}
 	public String genGif(String keyword){
-		JSONArray jsonArray = (JSONArray) JSON.parse(HttpUtils.getHttpResult("http://api.giphy.com/v1/gifs/search?q="+keyword+"&api_key=dc6zaTOxFJmzC"));
-		JSONObject entity = jsonArray.getJSONObject(0);
-	    String url = entity.getString("text");
+//		JSONArray jsonArray = (JSONArray) JSON.parse(HttpUtils.getHttpResult("http://api.giphy.com/v1/gifs/search?q="+keyword+"&api_key=dc6zaTOxFJmzC"));
+//		JSONObject entity = jsonArray.getJSONObject(0);
+//	    String url = entity.getString("text");
+		String content = "http://api.giphy.com/v1/gifs/search?q="+keyword+"&api_key=dc6zaTOxFJmzC";
+		String text = HttpUtils.getHttpResult(content);
+		JSONObject json = JSON.parseObject(text);
+		JSONArray data  = JSON.parseArray(json.getString("data"));
+		Random random = new Random();  
+		int index = random.nextInt(10);
+		String url = JSON.parseObject(JSON.parseObject(data.getString(index)).getString("images")).getString("url");
 		return url;
 	}
 	
