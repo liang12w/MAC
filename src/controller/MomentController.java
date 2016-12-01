@@ -41,9 +41,9 @@ public class MomentController {
 	public List showOwnMoment(int id) {
 		return momentservice.showOwnMoment(id);
 	}
-	@RequestMapping(value = "testWatson", method = RequestMethod.POST)
+	@RequestMapping(value = "WatsonService", method = RequestMethod.POST)
 	@ResponseBody
-	public String watson(String content) {
+	public String WatsonService(String content) {
 		AlchemyLanguage service = new AlchemyLanguage();
 		service.setApiKey("cf12a4426504285e2a30fcebd1933f4c133141a7");
 

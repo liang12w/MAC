@@ -1,6 +1,6 @@
 function validate(){
 	$.ajax({
-		url:"http://localhost:8080/GIFme/views/validateAction.do",
+		url:"http://localhost:8080/GIFme/testWatson.do",
 		type:"POST",
 		dataType:"json",
 		data:{"sid":$.cookie('sid')}, 
