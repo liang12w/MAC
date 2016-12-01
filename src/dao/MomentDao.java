@@ -4,12 +4,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.ibm.watson.developer_cloud.alchemy.v1.AlchemyLanguage;
 
 import entities.Moments;
 import entities.UserInfo;
 import utils.HttpUtils;
-
+@Repository("momentDao")
 public class MomentDao extends BaseDao {
 
 	UserInfo user = new UserInfo();
@@ -58,7 +60,7 @@ public class MomentDao extends BaseDao {
 	}
 	public List showAllMoment(){
 		Date now = new Date();
-		String hql = "select motContent, motGifUri,userInfo from Moments where rownum > (select count(*) - 15 from table)";
+		String hql = "select motContent, motGifUri,userInfo，motLikeNum，motCommentNum from Moments where rownum > (select count(*) - 15)";
 		List list = getSession().createQuery(hql).list();
 		for(int i = 0; i<list.size();i++){
 			moment = (Moments) list.get(i);
@@ -69,5 +71,18 @@ public class MomentDao extends BaseDao {
 		
 		return list;
 	}
-
+	public List showOwnMoment(UserInfo user){
+		Date now = new Date();
+		String hql = "select motContent, motGifUri,userInfo，motLikeNum，motCommentNum from Moments e where rownum > (select count(*) - 15) and "
+				+ "			e.userInfo = ?";
+		List list = getSession().createQuery(hql).setString(0,user.getUsrName()).list();
+		for(int i = 0; i<list.size();i++){
+			moment = (Moments) list.get(i);
+			if(now.after(moment.getMotVanishTime())){
+				list.remove(i);
+			}
+		}
+		
+		return list;
+	}
 }
