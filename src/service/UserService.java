@@ -17,7 +17,9 @@ import org.springframework.stereotype.Service;
 public class UserService {
     @Autowired
     public UserDao userDao;
-    
+    public UserInfo checkProfile(int id){
+    	return userDao.checkProfile(id);
+    }
     public boolean check(String username,String password){
         return userDao.check(username,password);
     } 

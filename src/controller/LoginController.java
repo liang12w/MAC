@@ -42,7 +42,11 @@ public class LoginController {
        map.put("errorMsg", "wrong username or password");
        return map;
     }
-
+	@ResponseBody
+    @RequestMapping(value = "", method = RequestMethod.POST)
+	public UserInfo checkProfile(int id){
+		return userService.checkProfile(id);
+	}
     /**
      * *
      * 验证参数

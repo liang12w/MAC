@@ -13,7 +13,8 @@ import org.springframework.stereotype.Repository;
 public class UserDao extends BaseDao {
 
 	public static final String KEY_MD5 = "MD5";
-	public static final char hexDigits[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+	public static final char hexDigits[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
+			'F' };
 
 	public boolean check(String username, String password) {
 		String hql1 = "FROM UserInfo user WHERE user.usrName = ?";
@@ -75,6 +76,14 @@ public class UserDao extends BaseDao {
 
 	}
 
+	public UserInfo checkProfile(int id) {
+
+		String hql = "FROM UserInfo e WHERE e.usrId = ?";
+		List list = getSession().createQuery(hql).setLong(0, id).list();
+		UserInfo user = (UserInfo) list.get(0);
+		return user;
+	}
+
 	/**
 	 * MD5加密
 	 * 
@@ -116,13 +125,14 @@ public class UserDao extends BaseDao {
 		}
 		return true;
 	}
-	public  void refreshTime(int id){
+
+	public void refreshTime(int id) {
 		String hql1 = "FROM UserInfo user WHERE user.usrName = ?";
 		List list = getSession().createQuery(hql1).setLong(0, id).list();
-		if(list.isEmpty()!=true){
+		if (list.isEmpty() != true) {
 			UserInfo tem = (UserInfo) list.get(0);
 			tem.setLastLogin(new Date());
 		}
-		
+
 	}
 }
