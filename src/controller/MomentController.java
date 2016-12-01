@@ -28,8 +28,8 @@ public class MomentController {
 	}
 
 	@RequestMapping(value = "views/getOwnMomentsAction", method = RequestMethod.POST)
-	public List showOwnMoment() {
-		return momentservice.showOwnMoment();
+	public List showOwnMoment(int id) {
+		return momentservice.showOwnMoment(id);
 	}
 
 }

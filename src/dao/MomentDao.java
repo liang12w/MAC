@@ -60,7 +60,7 @@ public class MomentDao extends BaseDao {
 	}
 	public List showAllMoment(){
 		Date now = new Date();
-		String hql = "select motContent, motGifUri,userInfo，motLikeNum，motCommentNum from Moments where rownum > (select count(*) - 15)";
+		String hql = "select motContent,motGifUri,userInfo,motLikeNum,motCommentNum from Moments where rownum > (select count(*) - 15)";
 		List list = getSession().createQuery(hql).list();
 		for(int i = 0; i<list.size();i++){
 			moment = (Moments) list.get(i);
@@ -71,10 +71,10 @@ public class MomentDao extends BaseDao {
 		
 		return list;
 	}
-	public List showOwnMoment(UserInfo user){
+	public List showOwnMoment(int id){
 		Date now = new Date();
-		String hql = "select motContent, motGifUri,userInfo，motLikeNum，motCommentNum from Moments e where rownum > (select count(*) - 15) and "
-				+ "			e.userInfo = ?";
+		String hql = "select motContent, motGifUri,userInfo,motLikeNum,motCommentNum from Moments e where rownum > (select count(*) - 15) and "
+				+ "			e.userInfo.usrId= ?";
 		List list = getSession().createQuery(hql).setString(0,user.getUsrName()).list();
 		for(int i = 0; i<list.size();i++){
 			moment = (Moments) list.get(i);

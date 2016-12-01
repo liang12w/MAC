@@ -20,7 +20,8 @@ public class MomentService {
 	public List showAllMoment(){
 		return momentdao.showAllMoment();
 	}
-	public List showOwnMoment(){
-		return momentdao.showAllMoment();
+	public List showOwnMoment(int id){
+		
+		return momentdao.showOwnMoment(id);
 	}
 }
