@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,18 +30,29 @@ public class MomentController {
 	MomentService momentservice = new MomentService();
 
 	@RequestMapping(value = "views/submitMomentAction",method = RequestMethod.POST)
-	public void sendMoment(String motContent, int id, String url) {
-		momentservice.saveContent(motContent, id, url);
+	public Map<String, Object> sendMoment(HttpServletRequest request, String motContent, String url) {
+		int usrId = Integer.parseInt(request.getAttribute("usrId").toString());
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(momentservice.saveContent(motContent, usrId, url) == true){
+		map.put("errorCode", 0);
+		return map;
+		}else{
+		map.put("errorCode",1);
+		map.put("errorMsg","put fail");
+		return map;
+		}
 	}
 
 	@RequestMapping(value = "views/getMomentsAction", method = RequestMethod.POST)
-	public List showAllMoment(int id) {
-		return momentservice.showAllMoment(id);
+	public List showAllMoment(HttpServletRequest request) {
+		int usrId = Integer.parseInt(request.getAttribute("usrId").toString());
+		return momentservice.showAllMoment(usrId);
 	}
 
 	@RequestMapping(value = "views/getOwnMomentsAction", method = RequestMethod.POST)
-	public List showOwnMoment(int id) {
-		return momentservice.showOwnMoment(id);
+	public List showOwnMoment(HttpServletRequest request) {
+		int usrId = Integer.parseInt(request.getAttribute("usrId").toString());
+		return momentservice.showOwnMoment(usrId);
 	}
 	@RequestMapping(value = "WatsonService", method = RequestMethod.POST)
 	@ResponseBody

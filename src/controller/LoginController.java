@@ -4,6 +4,8 @@ import service.UserService;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -44,7 +46,8 @@ public class LoginController {
     }
 	@ResponseBody
     @RequestMapping(value = "", method = RequestMethod.POST)
-	public UserInfo checkProfile(int id){
+	public UserInfo checkProfile(HttpServletRequest request){
+		int id = Integer.parseInt(request.getAttribute("usrId").toString());
 		return userService.checkProfile(id);
 	}
     /**
