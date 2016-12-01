@@ -25,10 +25,21 @@ public class MomentDao extends BaseDao {
 		return false;
 	
 	}
+	public boolean saveUrl(String url,Moments moment){
+		
+		moment.setMotGifUri(url);
+		getSession().save(moment);
+		return true;
+		
+	}
+	public void getKeyWord(){
+		
+	}
 
-	public void genGif(){
-		String keyword = null;
-		keyword = HttpUtils.getHttpResult("http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC");
+	public String genGif(String keyword){
+		String url = null;
+		url = HttpUtils.getHttpResult("http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC");
+		return url;
 	}
 
 }
