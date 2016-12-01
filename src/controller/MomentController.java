@@ -17,17 +17,17 @@ public class MomentController {
 	@Autowired
 	MomentService momentservice = new MomentService();
 
-	@RequestMapping(value = "submitMomentAction",method = RequestMethod.POST)
+	@RequestMapping(value = "views/submitMomentAction",method = RequestMethod.POST)
 	public void sendMoment(String motContent, int id) {
 		momentservice.saveContent(motContent, id);
 	}
 
-	@RequestMapping(value = "getMomentsAction", method = RequestMethod.POST)
+	@RequestMapping(value = "views/getMomentsAction", method = RequestMethod.POST)
 	public List showAllMoment() {
 		return momentservice.showAllMoment();
 	}
 
-	@RequestMapping(value = "getOwnMomentsAction", method = RequestMethod.POST)
+	@RequestMapping(value = "views/getOwnMomentsAction", method = RequestMethod.POST)
 	public List showOwnMoment() {
 		return momentservice.showOwnMoment();
 	}

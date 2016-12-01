@@ -116,4 +116,7 @@ public class UserDao extends BaseDao {
 		}
 		return true;
 	}
+	public void refreshTime(){
+		
+	}
 }
