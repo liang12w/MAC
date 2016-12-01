@@ -1,10 +1,4 @@
-var params = [];
 function init(){
-	// var sid = $.cookie('sid');
-	// console.info(sid);
-	if ($.cookie('sid')!=undefined) {
-		params.push({'sid':$.cookie('sid')});
-	};
 	$.ajax({
 		url:"http://localhost:8080/GIFme/views/validateAction.do",
 		type:"POST",
@@ -48,7 +42,10 @@ function generateInfo(data){
 }
 
 function getComments(motId){
-	params.push('motId',motId);
+	params = {
+		'sid':$.cookie('sid'),
+		'motId':motId
+	}
 	$.ajax({
 		url:"http://localhost:8080/GIFme/views/getCommentsAction.do",
 		type:"text",
@@ -70,11 +67,64 @@ function getComments(motId){
 	});
 }
 
-function submitComment(){
-	params.push("comment",undefined);//todo
-	params.push("motId",undefined);//todo
+function submitComment(motId){
+	params = {
+		'sid':$.cookie('sid'),
+		'motId':motId,
+		'comment':undefined//TODO
+	}
 	$.ajax({
 		url:"http://localhost:8080/GIFme/views/submitCommentsAction.do",
+		type:"text",
+		dataType:"json",
+		data:params,
+		success:function(data){
+			if (data.errorCode==-1) {
+				$.cookie('sid', null); 
+				alert(data.errorMsg);
+				window.location.href = "../login.html";
+			}else if(data.errorCode==1){
+				alert(data.errorMsg);
+				window.location.reload();
+			}else{
+				;//todo
+			}
+		},
+	});
+}
+
+function addLike(motId){
+	params = {
+		'sid':$.cookie('sid'),
+		'motId':motId,
+	}
+	$.ajax({
+		url:"http://localhost:8080/GIFme/views/addLikeAction.do",
+		type:"text",
+		dataType:"json",
+		data:params,
+		success:function(data){
+			if (data.errorCode==-1) {
+				$.cookie('sid', null); 
+				alert(data.errorMsg);
+				window.location.href = "../login.html";
+			}else if(data.errorCode==1){
+				alert(data.errorMsg);
+				window.location.reload();
+			}else{
+				;//todo
+			}
+		},
+	});
+}
+
+function removeLike(motId){
+	params = {
+		'sid':$.cookie('sid'),
+		'motId':motId,
+	}
+	$.ajax({
+		url:"http://localhost:8080/GIFme/views/removeLikeAction.do",
 		type:"text",
 		dataType:"json",
 		data:params,
