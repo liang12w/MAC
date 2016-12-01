@@ -41,9 +41,12 @@ public class Tests {
 			String text = HttpUtils.getHttpResult("http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC");
 			JSONObject json = JSON.parseObject(text);
 			JSONArray data  = JSON.parseArray(json.getString("data"));
-//			String url = JSON.parseObject(data.getString(0)).getString("images");
-			System.out.println(text);
+			int index = 0;
+			
+			String url = JSON.parseObject(data.getString(index)).getJSONObject("images").getJSONObject("downsized").getString("url");
+			System.out.println(url);
 			map.put("errorCode", 0);
+			map.put("url", url);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

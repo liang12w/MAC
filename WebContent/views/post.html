@@ -27,6 +27,8 @@
   <script src="../assets/dropdown/js/script.min.js"></script>
   <script src="../assets/touchSwipe/jquery.touchSwipe.min.js"></script>
   <script src="../assets/theme/js/script.js"></script>
+  <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript" src="../js/bootstrap.min.js"></script>
   <script type="text/javascript" src="../js/jquery.cookie.js"></script>
   <script type="text/javascript" src="post.js"></script>
 </head>
@@ -51,12 +53,9 @@
                     <button class="navbar-toggler pull-xs-right hidden-md-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
                         <div class="hamburger-icon"></div>
                     </button>
-
-                     <ul class="nav-dropdown collapse pull-xs-right nav navbar-nav navbar-toggleable-sm" id="exCollapsingNavbar"><li class="nav-item"><a class="nav-link link" href="home.html"><span class="mbri-home mbr-iconfont mbr-iconfont-btn"></span>&nbsp; home</a></li>
-                    <ul class="nav-dropdown collapse pull-xs-right nav navbar-nav navbar-toggleable-sm" id="exCollapsingNavbar"><li class="nav-item"><a class="nav-link link" href="profile.html"><span class="mbri-home mbr-iconfont mbr-iconfont-btn"></span>&nbsp; profile</a></li>
-                    <ul class="nav-dropdown collapse pull-xs-right nav navbar-nav navbar-toggleable-sm" id="exCollapsingNavbar"><li class="nav-item"><a class="nav-link link" href="post.html"><span class="mbri-home mbr-iconfont mbr-iconfont-btn"></span>&nbsp; post</a></li>
-                    
-
+                     <ul class="nav-dropdown collapse pull-xs-right nav navbar-nav navbar-toggleable-sm" id="exCollapsingNavbar"><li class="nav-item"><a class="nav-link link" href="home.html"><span class="mbri-home mbr-iconfont mbr-iconfont-btn"></span>&nbsp; home</a></li></ul>
+                    <ul class="nav-dropdown collapse pull-xs-right nav navbar-nav navbar-toggleable-sm" id="exCollapsingNavbar"><li class="nav-item"><a class="nav-link link" href="profile.html"><span class="mbri-home mbr-iconfont mbr-iconfont-btn"></span>&nbsp; profile</a></li></ul>
+                    <ul class="nav-dropdown collapse pull-xs-right nav navbar-nav navbar-toggleable-sm" id="exCollapsingNavbar"><li class="nav-item"><a class="nav-link link" href="post.html"><span class="mbri-home mbr-iconfont mbr-iconfont-btn"></span>&nbsp; post</a></li></ul>
                 </div>
             </div>
 
@@ -90,7 +89,7 @@
                   </br>   </br>  </br>  </br>  </br>   
                  <HR size="1000">  
                          <div class="control-wrapper"  style='float:left;'>
-                  <input type="submit" value="uploadGIF" class="btn btn-info">&nbsp;&nbsp;&nbsp;&nbsp; <img src="../images/3.jpg" border="10"  name="add GIF" width=20 height=20/> 
+                  <input type="bottom" value="uploadGIF" onclick='getGif();' class="btn btn-info">&nbsp;&nbsp;&nbsp;&nbsp; <img src="../images/3.jpg" border="10"  name="add GIF" width=20 height=20/> 
                   </div>    
             </form>
           </section>
@@ -99,8 +98,6 @@
           </form>         
     </div>
   </div>
-  <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
                 </div>
             </div>
         </div>

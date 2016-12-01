@@ -1,6 +1,6 @@
 function validate(){
 	$.ajax({
-		url:"http://localhost:8080/GIFme/getGifAction.do",
+		url:"http://localhost:8080/GIFme/views/validateAction.do",
 		type:"POST",
 		dataType:"json",
 		data:{"sid":$.cookie('sid')}, 
@@ -23,7 +23,7 @@ function submit(){
 		return;
 	};
 	$.ajax({
-		url:"http://localhost:8080/GIFme/submitMomentAction.do",
+		url:"http://localhost:8080/GIFme/views/submitMomentAction.do",
 		type:"POST",
 		dataType:"json",
 		data:params,
@@ -44,7 +44,7 @@ function getGif(){
 		'content':$('content').val()
 	}
 	$.ajax({
-		url:"http://localhost:8080/GIFme/views/getGifAction.do",
+		url:"http://localhost:8080/GIFme/getGifAction.do",
 		type:"POST",
 		dataType:"json",
 		data:params, 
