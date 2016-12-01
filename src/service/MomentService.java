@@ -13,8 +13,8 @@ import dao.MomentDao;
 public class MomentService {
 	@Autowired
 	MomentDao momentdao = new MomentDao();
-	public boolean saveContent(String content,int id){
-		momentdao.saveContent(content,id);
+	public boolean saveContent(String content,int id, String url){
+		momentdao.saveContent(content,id, url);
 		return true;
 	}
 	public List showAllMoment(int id){

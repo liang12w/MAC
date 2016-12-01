@@ -2,25 +2,28 @@ package dao;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import controller.MomentController;
 import entities.Moments;
 import entities.UserInfo;
-import net.sf.json.JSONArray;
 import net.sf.json.util.JSONTokener;
 import utils.HttpUtils;
 @Repository("momentDao")
 public class MomentDao extends BaseDao {
-	MomentController momentcontroller = new MomentController();
 	UserInfo user = new UserInfo();
 	Moments moment = new Moments();
 	UserDao ud = new UserDao();
-	public boolean saveContent(String content, int id) {
+
+	public boolean saveContent(String content, int id, String url) {
+		MomentDao momentdao = new MomentDao();
 		String hql = "FROM UserInfo e WHERE e.usrId= ?";
 		List list = getSession().createQuery(hql).setInteger(0, id).list();
 		if(!list.isEmpty()){
@@ -31,7 +34,7 @@ public class MomentDao extends BaseDao {
 			moment.setMotSentTime(date);
 			Date vdate = MomentDao.getVanishTime(date);
 			moment.setMotVanishTime(vdate);
-			momentcontroller.watson(moment);
+			moment.setMotGifUri(url);
 			getSession().save(moment);
 			return true;
 		}

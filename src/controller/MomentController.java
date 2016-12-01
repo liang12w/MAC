@@ -26,10 +26,10 @@ public class MomentController {
 
 	@Autowired
 	MomentService momentservice = new MomentService();
-	MomentController momentcontroller = new MomentController();
+
 	@RequestMapping(value = "views/submitMomentAction",method = RequestMethod.POST)
-	public void sendMoment(String motContent, int id) {
-		momentservice.saveContent(motContent, id);
+	public void sendMoment(String motContent, int id, String url) {
+		momentservice.saveContent(motContent, id, url);
 	}
 
 	@RequestMapping(value = "views/getMomentsAction", method = RequestMethod.POST)
@@ -41,10 +41,9 @@ public class MomentController {
 	public List showOwnMoment(int id) {
 		return momentservice.showOwnMoment(id);
 	}
-
 	@RequestMapping(value = "testWatson", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> watson(Moments moment) {
+	public String watson(String content) {
 		AlchemyLanguage service = new AlchemyLanguage();
 		service.setApiKey("cf12a4426504285e2a30fcebd1933f4c133141a7");
 
@@ -56,14 +55,12 @@ public class MomentController {
 	    JSONArray array = JSON.parseArray(entities.getEntities().toString());
 	    JSONObject entity = array.getJSONObject(0);
 	    String keyword = entity.getString("text");
-	    String url = momentcontroller.genGif(keyword);
+	    String url = genGif(keyword);
 	    String type = entity.getString("type");
-	    moment.setMotGifUri(url);
-	    
 	    System.out.println("text is "+keyword+" type is "+ type);
-	    
-		map.put("errorCode", 0);
-		return map;
+	    return url;
+//		map.put("errorCode", 0);
+//		return map;
 	}
 	public String genGif(String keyword){
 		JSONArray jsonArray = (JSONArray) JSON.parse(HttpUtils.getHttpResult("http://api.giphy.com/v1/gifs/search?q="+keyword+"&api_key=dc6zaTOxFJmzC"));
@@ -71,4 +68,5 @@ public class MomentController {
 	    String url = entity.getString("text");
 		return url;
 	}
+	
 }
