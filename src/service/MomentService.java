@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 import dao.MomentDao;
 
 public class MomentService {
@@ -8,5 +10,8 @@ public class MomentService {
 	public boolean saveContent(String content,int id){
 		momentdao.saveContent(content,id);
 		return true;
+	}
+	public List showAllMoment(){
+		return momentdao.showAllMoment();
 	}
 }

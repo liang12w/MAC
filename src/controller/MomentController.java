@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,9 +14,12 @@ import service.MomentService;
 public class MomentController {
 
 //	@Autowired
+	MomentService momentservice = new MomentService();
 	public void sendMoment(String motContent,int id){
-		MomentService momentservice = new MomentService();
 	    momentservice.saveContent(motContent,id);
+	}
+	public List showAllMoments(){
+		return momentservice.showAllMoment();
 	}
 
 }
