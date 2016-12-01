@@ -16,8 +16,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ibm.watson.developer_cloud.alchemy.v1.AlchemyLanguage;
 import com.ibm.watson.developer_cloud.alchemy.v1.model.Entities;
-
-import apple.laf.JRSUIUtils.Images;
 import entities.Moments;
 import service.MomentService;
 import utils.HttpUtils;
