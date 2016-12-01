@@ -55,6 +55,9 @@ public class MomentController {
 	    JSONArray array = JSON.parseArray(entities.getEntities().toString());
 	    JSONObject entity = array.getJSONObject(0);
 	    String keyword = entity.getString("text");
+	    if(keyword == null || keyword == ""){
+	    	keyword = "sky";
+	    }
 	    String url = genGif(keyword);
 //	    String type = entity.getString("type");
 	    map.remove(AlchemyLanguage.TEXT);
