@@ -35,6 +35,8 @@ public class MomentDao extends BaseDao {
 			Date vdate = MomentDao.getVanishTime(date);
 			moment.setMotVanishTime(vdate);
 			moment.setMotGifUri(url);
+			moment.setMotLikeNum(0);
+			moment.setMotCommentNum(0);
 			getSession().save(moment);
 			return true;
 			
