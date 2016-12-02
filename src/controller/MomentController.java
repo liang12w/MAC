@@ -72,7 +72,7 @@ public class MomentController {
 		Entities entities = service.getEntities(map).execute();
 		// System.out.println("Entities: " + entities);
 		String tem = entities.getEntities().toString();
-		if (tem == null || tem == "") {
+		if (tem == null || tem == "[]") {
 			keyword = "sky";
 		} else {
 			JSONArray array = JSON.parseArray(tem);
@@ -93,7 +93,7 @@ public class MomentController {
 		JSONObject json = JSON.parseObject(text);
 		JSONArray data = JSON.parseArray(json.getString("data"));
 		Random random = new Random();
-		int index = random.nextInt(10);
+		int index = random.nextInt(25);
 		String url = JSON.parseObject(data.getString(index)).getJSONObject("images").getJSONObject("downsized")
 				.getString("url");
 		return url;
