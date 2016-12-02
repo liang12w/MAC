@@ -28,7 +28,8 @@ public class MomentController {
 
 	@Autowired
 	MomentService momentservice = new MomentService();
-
+	
+	@ResponseBody
 	@RequestMapping(value = "views/submitMomentAction",method = RequestMethod.POST)
 	public Map<String, Object> sendMoment(HttpServletRequest request, String motContent, String url) {
 		int usrId = Integer.parseInt(request.getAttribute("usrId").toString());
@@ -43,12 +44,13 @@ public class MomentController {
 		}
 	}
 
+	@ResponseBody
 	@RequestMapping(value = "views/getMomentsAction", method = RequestMethod.POST)
 	public List showAllMoment(HttpServletRequest request) {
 		int usrId = Integer.parseInt(request.getAttribute("usrId").toString());
 		return momentservice.showAllMoment(usrId);
 	}
-
+	@ResponseBody
 	@RequestMapping(value = "views/getOwnMomentsAction", method = RequestMethod.POST)
 	public List showOwnMoment(HttpServletRequest request) {
 		int usrId = Integer.parseInt(request.getAttribute("usrId").toString());
