@@ -29,6 +29,7 @@ public class MomentController {
 
 	@Autowired
 	MomentService momentservice = new MomentService();
+	@Autowired
 	UserService userservice = new UserService();
 
 	@ResponseBody

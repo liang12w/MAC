@@ -132,6 +132,7 @@ public class UserDao extends BaseDao {
 		if (list.isEmpty() != true) {
 			UserInfo tem = (UserInfo) list.get(0);
 			tem.setLastLogin(new Date());
+			getSession().save(tem);
 		}
 
 	}
