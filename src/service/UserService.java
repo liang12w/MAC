@@ -17,6 +17,10 @@ import org.springframework.stereotype.Service;
 public class UserService {
     @Autowired
     public UserDao userDao;
+    public void refreshTime(int id) {
+         userDao.refreshTime(id);
+    }
+    
     public UserInfo checkProfile(int id){
     	return userDao.checkProfile(id);
     }

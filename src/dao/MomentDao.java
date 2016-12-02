@@ -20,7 +20,6 @@ import utils.HttpUtils;
 public class MomentDao extends BaseDao {
 	UserInfo user = new UserInfo();
 	Moments moment = new Moments();
-	UserDao ud = new UserDao();
 
 	public boolean saveContent(String content, int id, String url) {
 		MomentDao momentdao = new MomentDao();
@@ -61,6 +60,7 @@ public class MomentDao extends BaseDao {
 
 	
 	public List showAllMoment(int id){
+		System.out.println(id);
 		Date now = new Date();
 		String hql = "From Moments e order by e.motSentTime desc";
 		List list = getSession().createQuery(hql).setFirstResult(0)
@@ -71,7 +71,6 @@ public class MomentDao extends BaseDao {
 				list.remove(i);
 			}
 		}
-		ud.refreshTime(id);
 		return list;
 	}
 	public List showOwnMoment(int id){
@@ -85,7 +84,6 @@ public class MomentDao extends BaseDao {
 				list.remove(i);
 			}
 		}
-		ud.refreshTime(id);
 		return list;
 	}
 	

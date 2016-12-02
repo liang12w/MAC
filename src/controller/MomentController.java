@@ -20,6 +20,7 @@ import com.ibm.watson.developer_cloud.alchemy.v1.AlchemyLanguage;
 import com.ibm.watson.developer_cloud.alchemy.v1.model.Entities;
 import entities.Moments;
 import service.MomentService;
+import service.UserService;
 import utils.HttpUtils;
 
 @Controller
@@ -28,6 +29,7 @@ public class MomentController {
 
 	@Autowired
 	MomentService momentservice = new MomentService();
+	UserService userservice = new UserService();
 
 	@ResponseBody
 	@RequestMapping(value = "views/submitMomentAction", method = RequestMethod.POST)
@@ -50,6 +52,8 @@ public class MomentController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		int usrId = Integer.parseInt(request.getAttribute("usrId").toString());
 		List list = momentservice.showAllMoment(usrId);
+		userservice.refreshTime(usrId);
+		
 		if (list.size() != 0) {
 			map.put("errorCode", 0);
 			map.put("list", list);
@@ -67,6 +71,7 @@ public class MomentController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		int usrId = Integer.parseInt(request.getAttribute("usrId").toString());
 		List list = momentservice.showOwnMoment(usrId);
+		userservice.refreshTime(usrId);
 		if (list.size() != 0) {
 			map.put("errorCode", 0);
 			map.put("list", list);
