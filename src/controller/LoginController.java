@@ -46,9 +46,12 @@ public class LoginController {
     }
 	@ResponseBody
     @RequestMapping(value = "/views/getUserInfoAction", method = RequestMethod.POST)
-	public UserInfo checkProfile(HttpServletRequest request){
+	public HashMap checkProfile(HttpServletRequest request){
 		int id = Integer.parseInt(request.getAttribute("usrId").toString());
-		return userService.checkProfile(id);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("userinfo", userService.checkProfile(id)) ;
+		map.put("errorCode", 0);
+		return map;
 	}
     /**
      * *
