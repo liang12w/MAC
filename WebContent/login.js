@@ -4,7 +4,7 @@ function submit(){
 			'username':$('#username').val(),
 			'password':$.md5($('#password').val())
 		};
-		var checked = $('checked').val();
+		var checked = $('#checked').val();
 		$.ajax({
 			url:"http://localhost:8080/GIFme/loginAction.do",
 			type : "POST",

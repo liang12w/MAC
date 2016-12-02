@@ -64,12 +64,11 @@ function getComments(motId){
 				$.cookie('sid', null); 
 				alert(data.errorMsg);
 				window.location.href = "../login.html";
-			}else if(data.errorCode==1){
+			}else if(data.errorCode==0){
+				generateComments(data.list,motId);
+			}else{
 				alert(data.errorMsg);
 				window.location.reload();
-			}else{
-				$.cookie("sid",{expires:7});
-				generateComments(data.moments);
 			}
 		},
 	});
@@ -149,4 +148,15 @@ function removeLike(motId){
 			}
 		},
 	});
+}
+
+function generateComments(data,motId){
+	content = "<div class='comment hidden' id='show_comments'>"+
+              "<form id='contact-form' method='post'>"+
+                "<fieldset>"+
+                    "<textarea id='com"+motId+"' onBlur='if(this.value=='') this.value='Message'' onFocus='if(this.value =='Message' ) this.value='''>Message</textarea><div class='buttons'>"+
+                      "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a href='#' onClick='document.getElementById('contact-form').reset()'>Clear</a>"+
+                        "&nbsp; &nbsp; <a href='#' onClick='submitCommentsAction();'>Send</a>"+
+                    "</div></fieldset>"+           
+            	"</form></div>";
 }
