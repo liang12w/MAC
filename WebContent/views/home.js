@@ -1,30 +1,33 @@
 function init(){
+	// $.ajax({
+	// 	url:"http://localhost:8080/GIFme/views/validateAction.do",
+	// 	type:"POST",
+	// 	dataType:"json",
+	// 	data:{'sid':$.cookie('sid')},
+	// 	success:function(data){
+	// 		if (data.errorCode==-1) {
+	// 			alert(data.errorMsg);
+	// 			window.location.href = "../login.html";
+	// 		}
+	// 	},
+	// });
 	$.ajax({
-		url:"http://localhost:8080/GIFme/views/validateAction.do",
+		url:"http://localhost:8080/GIFme/views/getMomentsAction.do",
 		type:"POST",
 		dataType:"json",
 		data:{'sid':$.cookie('sid')},
 		success:function(data){
-			if (data.errorCode==-1) {
+			if(data.errorCode== 0){
+				generateInfo(data.moments);
+			}else if (data.errorCode==-1) {
 				alert(data.errorMsg);
-				window.location.href = "../login.html";
+				window.location.href = '../login.html';
+			}else{
+				alert(data.errorMsg);
+				window.location.reload();
 			}
 		},
 	});
-	// $.ajax({
-	// 	url:"http://localhost:8080/GIFme/views/getMomentsAction.do",
-	// 	type:"POST",
-	// 	dataType:"json",
-	// 	data:params,
-	// 	success:function(data){
-	// 		if(data.errorCode== 0){
-	// 			generateInfo(data.moments);
-	// 		}else{
-	// 			alert(data.errorMsg);
-	// 			window.location.reload();
-	// 		}
-	// 	},
-	// });
 }
 
 $(init)

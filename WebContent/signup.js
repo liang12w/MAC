@@ -7,7 +7,7 @@ function doInit() {
 		}
 		var nickname = $("#first_name").val()+"$"+$("#last_name").val();
 		var params = {
-			"nickname" : nickname,
+			"usrNickname" : nickname,
 			"username" : $("#username").val(),
 			"email" : $("#email").val(),
 //			"gender":gender,

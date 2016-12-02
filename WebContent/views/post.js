@@ -16,7 +16,8 @@ function validate(){
 function submit(){
 	params = {
 		'sid':$.cookie('sid'),
-		'content':$('content').val()
+		'motContent':$('#content').val(),
+		'url':$("img[name='add GIF']").attr("src")
 	}
 	if (content=undefined) {
 		alert("Please input something.");
@@ -54,6 +55,7 @@ function getGif(){
 				window.location.href = '../login.html';
 			} else if (data.errorCode==0) {
 				//TODO
+				$("img[name='add GIF']").attr("src",data.url);
 			} else{
 				alert(data.errorMsg);
 				window.location.href = 'home.html';
