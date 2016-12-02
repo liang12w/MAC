@@ -28,19 +28,21 @@ public class MomentController {
 
 	@Autowired
 	MomentService momentservice = new MomentService();
-	
+
 	@ResponseBody
-	@RequestMapping(value = "views/submitMomentAction",method = RequestMethod.POST)
+	@RequestMapping(value = "views/submitMomentAction", method = RequestMethod.POST)
 	public Map<String, Object> sendMoment(HttpServletRequest request, String motContent, String url) {
 		int usrId = Integer.parseInt(request.getAttribute("usrId").toString());
 		Map<String, Object> map = new HashMap<String, Object>();
-		if(momentservice.saveContent(motContent, usrId, url) == true){
-		map.put("errorCode", 0);
-		return map;
-		}else{
-		map.put("errorCode",1);
-		map.put("errorMsg","put fail");
-		return map;
+		List list = momentservice.saveContent(motContent, usrId, url);
+		if (list.size() != 0) {
+			map.put("errorCode", 0);
+			map.put("list", list);
+			return map;
+		} else {
+			map.put("errorCode", 1);
+			map.put("errorMsg", "put fail");
+			return map;
 		}
 	}
 
@@ -50,12 +52,14 @@ public class MomentController {
 		int usrId = Integer.parseInt(request.getAttribute("usrId").toString());
 		return momentservice.showAllMoment(usrId);
 	}
+
 	@ResponseBody
 	@RequestMapping(value = "views/getOwnMomentsAction", method = RequestMethod.POST)
 	public List showOwnMoment(HttpServletRequest request) {
 		int usrId = Integer.parseInt(request.getAttribute("usrId").toString());
 		return momentservice.showOwnMoment(usrId);
 	}
+
 	@RequestMapping(value = "WatsonService", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> WatsonService(String content) {
@@ -63,34 +67,36 @@ public class MomentController {
 		service.setApiKey("cf12a4426504285e2a30fcebd1933f4c133141a7");
 
 		Map<String, Object> map = new HashMap<String, Object>();
-	    map.put(AlchemyLanguage.TEXT, content);
-	    String keyword = null;
-	    Entities entities = service.getEntities(map).execute();
-//	    System.out.println("Entities: " + entities);
-	    String tem = entities.getEntities().toString();
-	    if(tem == null || tem ==""){
-	    	keyword = "sky";
-	    }else{
-	    JSONArray array = JSON.parseArray(tem);
-	    JSONObject entity = array.getJSONObject(0);
-	        keyword = entity.getString("text");
-	    }
-	    String url = genGif(keyword);
-//	    String type = entity.getString("type");
-	    map.remove(AlchemyLanguage.TEXT);
+		map.put(AlchemyLanguage.TEXT, content);
+		String keyword = null;
+		Entities entities = service.getEntities(map).execute();
+		// System.out.println("Entities: " + entities);
+		String tem = entities.getEntities().toString();
+		if (tem == null || tem == "") {
+			keyword = "sky";
+		} else {
+			JSONArray array = JSON.parseArray(tem);
+			JSONObject entity = array.getJSONObject(0);
+			keyword = entity.getString("text");
+		}
+		String url = genGif(keyword);
+		// String type = entity.getString("type");
+		map.remove(AlchemyLanguage.TEXT);
 		map.put("errorCode", 0);
 		map.put("url", url);
 		return map;
 	}
-	public String genGif(String keyword){
-		String content = "http://api.giphy.com/v1/gifs/search?q="+keyword+"&api_key=dc6zaTOxFJmzC";
+
+	public String genGif(String keyword) {
+		String content = "http://api.giphy.com/v1/gifs/search?q=" + keyword + "&api_key=dc6zaTOxFJmzC";
 		String text = HttpUtils.getHttpResult(content);
 		JSONObject json = JSON.parseObject(text);
-		JSONArray data  = JSON.parseArray(json.getString("data"));
-		Random random = new Random();  
+		JSONArray data = JSON.parseArray(json.getString("data"));
+		Random random = new Random();
 		int index = random.nextInt(10);
-		String url = JSON.parseObject(data.getString(index)).getJSONObject("images").getJSONObject("downsized").getString("url");
+		String url = JSON.parseObject(data.getString(index)).getJSONObject("images").getJSONObject("downsized")
+				.getString("url");
 		return url;
 	}
-	
+
 }
