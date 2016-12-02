@@ -34,10 +34,8 @@ public class MomentController {
 	public Map<String, Object> sendMoment(HttpServletRequest request, String motContent, String url) {
 		int usrId = Integer.parseInt(request.getAttribute("usrId").toString());
 		Map<String, Object> map = new HashMap<String, Object>();
-		List list = momentservice.saveContent(motContent, usrId, url);
-		if (list.size() != 0) {
+		if(momentservice.saveContent(motContent, usrId, url)){
 			map.put("errorCode", 0);
-			map.put("list", list);
 			return map;
 		} else {
 			map.put("errorCode", 1);
@@ -48,16 +46,37 @@ public class MomentController {
 
 	@ResponseBody
 	@RequestMapping(value = "views/getMomentsAction", method = RequestMethod.POST)
-	public List showAllMoment(HttpServletRequest request) {
+	public Map<String, Object> showAllMoment(HttpServletRequest request) {
+		Map<String, Object> map = new HashMap<String, Object>();
 		int usrId = Integer.parseInt(request.getAttribute("usrId").toString());
-		return momentservice.showAllMoment(usrId);
+		List list = momentservice.showAllMoment(usrId);
+		if (list.size() != 0) {
+			map.put("errorCode", 0);
+			map.put("list", list);
+			return map;
+		} else {
+			map.put("errorCode", 1);
+			map.put("errorMsg", "no message");
+			return map;
+		}
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "views/getOwnMomentsAction", method = RequestMethod.POST)
-	public List showOwnMoment(HttpServletRequest request) {
+	public Map<String, Object> showOwnMoment(HttpServletRequest request) {
+		Map<String, Object> map = new HashMap<String, Object>();
 		int usrId = Integer.parseInt(request.getAttribute("usrId").toString());
-		return momentservice.showOwnMoment(usrId);
+		List list = momentservice.showOwnMoment(usrId);
+		if (list.size() != 0) {
+			map.put("errorCode", 0);
+			map.put("list", list);
+			return map;
+		} else {
+			map.put("errorCode", 1);
+			map.put("errorMsg", "no message");
+			return map;
+		}
+		
 	}
 
 	@RequestMapping(value = "WatsonService", method = RequestMethod.POST)

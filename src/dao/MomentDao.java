@@ -22,7 +22,7 @@ public class MomentDao extends BaseDao {
 	Moments moment = new Moments();
 	UserDao ud = new UserDao();
 
-	public List saveContent(String content, int id, String url) {
+	public boolean saveContent(String content, int id, String url) {
 		MomentDao momentdao = new MomentDao();
 		String hql = "FROM UserInfo e WHERE e.usrId= ?";
 		List list = getSession().createQuery(hql).setInteger(0, id).list();
@@ -36,9 +36,10 @@ public class MomentDao extends BaseDao {
 			moment.setMotVanishTime(vdate);
 			moment.setMotGifUri(url);
 			getSession().save(moment);
+			return true;
 			
 		}
-		return list;
+		return false;
 	}
 	public static Date getVanishTime(Date starttime){
 		Calendar c1 = Calendar.getInstance();
