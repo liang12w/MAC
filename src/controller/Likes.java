@@ -15,7 +15,7 @@ import service.LikeService;
  * @date Create Date：Nov 30, 2016 8:24:12 PM
  **/
 @Controller
-@RequestMapping(value = "")
+@RequestMapping(value = "/views")
 public class Likes {
 	@Autowired
 	LikeService likeService;

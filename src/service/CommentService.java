@@ -15,8 +15,8 @@ public class CommentService {
 	@Autowired
 	CommentDao commentDao = new CommentDao();
 
-	public boolean addComment(String content, int motId) {
-		commentDao.addComments(content, motId);
+	public boolean addComment(String content, int motId, int usrId) {
+		commentDao.addComments(content, motId, usrId);
 		return true;
 	}
 
@@ -28,7 +28,7 @@ public class CommentService {
 		return deleteComment(motId, comtId);
 	}
 
-	public boolean modifyComment(int motId, int comtId, String content) {
-		return commentDao.modifyComments(motId, comtId, content);
-	}
+//	public boolean modifyComment(int motId, int comtId, String content) {
+//		return commentDao.modifyComments(motId, comtId, content);
+//	}
 }

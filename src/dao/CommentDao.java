@@ -13,29 +13,38 @@ import entities.UserInfo;
 
 public class CommentDao extends BaseDao{
 	
-	UserInfo user = new UserInfo();
-	Comments comment = new Comments();
 	
-	public boolean addComments(String content, int motId){
+	public boolean addComments(String content, int motId, int usrId){
+		Comments comment = new Comments();
+		
 		String hql = "FROM Moments e WHERE e.motId = ?";
+		String hql1 = "FROM UserInfo e WHERE e.usrId = ?";
 		list = getSession().createQuery(hql).setInteger(0, motId).list();
+		
 		if (!list.isEmpty()) {
 			Moments moment = (Moments) list.get(0);
-			user = (UserInfo) list.get(0);
-			comment.setUserInfo(user);
+			moment.setMotCommentNum(moment.getMotCommentNum()+1);
+			getSession().update(moment);
+			
+			list = getSession().createQuery(hql1).setInteger(0, usrId).list();
+			UserInfo user = (UserInfo) list.get(0);
+			
 			comment.setComtContent(content);
 			Date date = new Date();
-			comment.setComtTime(date);			
-			moment.setMotCommentNum(moment.getMotCommentNum()+1);
-			getSession().save(moment);
+			comment.setComtTime(date);		
+			getSession().save(comment);
+			comment.setMoments(moment);
+			comment.setUserInfo(user);
+			getSession().update(comment);
+			getSession().flush();
 			return true;
 		} else
 			return false;
 	}
 	
 	public List showAllComments(int motId){
-		String hql = "select comtContent, comtTime, userInfo FROM Moments e WHERE e.motId = ?";
-		List list = getSession().createQuery(hql).list();
+		String hql = "select e.commentses FROM Moments e WHERE e.motId = ?";
+		List list = getSession().createQuery(hql).setInteger(0, motId).list();
 //		for(int i = 0; i < list.size(); i++){
 //			comment = (Comments) list.get(i);
 //		}
@@ -57,16 +66,16 @@ public class CommentDao extends BaseDao{
 			return false;
 	}
 	
-	public boolean modifyComments(int motId, int comtId, String content){
-		String hql = "select comtId, comtContent, comtTime, userInfo FROM Moments e WHERE e.motId = ?";
-		list = getSession().createQuery(hql).setInteger(0, motId).list();
-		if(!list.isEmpty()){
-			comment.setComtContent(content);
-			Date date = new Date();
-			comment.setComtTime(date);
-			getSession().save(comment);
-		return true;
-		} else
-			return false;
-	}
+//	public boolean modifyComments(int motId, int comtId, String content){
+//		String hql = "select comtId, comtContent, comtTime, userInfo FROM Moments e WHERE e.motId = ?";
+//		list = getSession().createQuery(hql).setInteger(0, motId).list();
+//		if(!list.isEmpty()){
+//			comment.setComtContent(content);
+//			Date date = new Date();
+//			comment.setComtTime(date);
+//			getSession().save(comment);
+//		return true;
+//		} else
+//			return false;
+//	}
 }

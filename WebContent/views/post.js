@@ -30,7 +30,7 @@ function submit(){
 		data:params,
 		success:function(data){
 			if (data.errorCode==0) {
-				window.location.href = 'home.html';
+				window.location.href = 'me.html';
 			} else{
 				alert(data.errorMsg);
 				window.location.href = 'home.html';

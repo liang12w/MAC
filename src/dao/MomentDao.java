@@ -76,7 +76,7 @@ public class MomentDao extends BaseDao {
 	public List showOwnMoment(int id){
 		Date now = new Date();
 		String hql = " from Moments e where e.userInfo.usrId= ? order by e.motSentTime desc";
-		List list = getSession().createQuery(hql).setFirstResult(0)
+		List list = getSession().createQuery(hql).setInteger(0, id).setFirstResult(0)
                 .setMaxResults(10).list();
 		for(int i = 0; i<list.size();i++){
 			moment = (Moments) list.get(i);
