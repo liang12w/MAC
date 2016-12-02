@@ -127,8 +127,8 @@ public class UserDao extends BaseDao {
 	}
 
 	public void refreshTime(int id) {
-		String hql1 = "FROM UserInfo user WHERE user.usrName = ?";
-		List list = getSession().createQuery(hql1).setLong(0, id).list();
+		String hql1 = "FROM UserInfo user WHERE user.usrId = ?";
+		List list = getSession().createQuery(hql1).setInteger(0, id).list();
 		if (list.isEmpty() != true) {
 			UserInfo tem = (UserInfo) list.get(0);
 			tem.setLastLogin(new Date());
