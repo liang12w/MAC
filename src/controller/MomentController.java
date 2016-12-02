@@ -29,20 +29,18 @@ public class MomentController {
 
 	@Autowired
 	MomentService momentservice = new MomentService();
-	@Autowired
-	UserService userservice = new UserService();
 
 	@ResponseBody
 	@RequestMapping(value = "views/submitMomentAction", method = RequestMethod.POST)
 	public Map<String, Object> sendMoment(HttpServletRequest request, String motContent, String url) {
 		int usrId = Integer.parseInt(request.getAttribute("usrId").toString());
 		Map<String, Object> map = new HashMap<String, Object>();
-		if(momentservice.saveContent(motContent, usrId, url)){
+		if (momentservice.saveContent(motContent, usrId, url)) {
 			map.put("errorCode", 0);
 			return map;
 		} else {
 			map.put("errorCode", 1);
-			map.put("errorMsg", "put fail");
+			map.put("errorMsg", "submit error.");
 			return map;
 		}
 	}
@@ -53,8 +51,6 @@ public class MomentController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		int usrId = Integer.parseInt(request.getAttribute("usrId").toString());
 		List list = momentservice.showAllMoment(usrId);
-		userservice.refreshTime(usrId);
-		
 		if (list.size() != 0) {
 			map.put("errorCode", 0);
 			map.put("list", list);
@@ -72,7 +68,6 @@ public class MomentController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		int usrId = Integer.parseInt(request.getAttribute("usrId").toString());
 		List list = momentservice.showOwnMoment(usrId);
-		userservice.refreshTime(usrId);
 		if (list.size() != 0) {
 			map.put("errorCode", 0);
 			map.put("list", list);
@@ -82,10 +77,10 @@ public class MomentController {
 			map.put("errorMsg", "no message");
 			return map;
 		}
-		
+
 	}
 
-	@RequestMapping(value = "WatsonService", method = RequestMethod.POST)
+	@RequestMapping(value = "/views/WatsonService", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> WatsonService(String content) {
 		AlchemyLanguage service = new AlchemyLanguage();
