@@ -45,7 +45,7 @@ function getGif(){
 		'content':$('#content').val()
 	}
 	$.ajax({
-		url:"http://localhost:8080/GIFme/WatsonService.do",
+		url:"http://localhost:8080/GIFme/views/WatsonService.do",
 		type:"POST",
 		dataType:"json",
 		data:params, 
