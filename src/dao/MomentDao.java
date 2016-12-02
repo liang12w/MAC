@@ -62,8 +62,10 @@ public class MomentDao extends BaseDao {
 	
 	public List showAllMoment(int id){
 		Date now = new Date();
-		String hql = "From Moments where rownum > (select count(*) - 15)";
+		String hql = "select motContent, motGifUri,userInfo,motLikeNum,motCommentNum From Moments";
 		List list = getSession().createQuery(hql).list();
+		list = getSession().createQuery(hql).setFirstResult(list.size()-10)
+                .setMaxResults(list.size()).list();
 		for(int i = 0; i<list.size();i++){
 			moment = (Moments) list.get(i);
 			if(now.after(moment.getMotVanishTime())){
@@ -75,8 +77,7 @@ public class MomentDao extends BaseDao {
 	}
 	public List showOwnMoment(int id){
 		Date now = new Date();
-		String hql = "select motContent, motGifUri,userInfo,motLikeNum,motCommentNum from Moments e where rownum > (select count(*) - 15) and "
-				+ "			e.userInfo.usrId= ?";
+		String hql = "select motContent, motGifUri,userInfo,motLikeNum,motCommentNum from Moments e where e.userInfo.usrId= ?";
 		List list = getSession().createQuery(hql).setString(0,user.getUsrName()).list();
 		for(int i = 0; i<list.size();i++){
 			moment = (Moments) list.get(i);
