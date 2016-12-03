@@ -59,8 +59,7 @@ public class MomentDao extends BaseDao {
 	
 
 	
-	public List showAllMoment(int id){
-		System.out.println(id);
+	public List showAllMoment(){
 		Date now = new Date();
 		String hql = "From Moments e order by e.motSentTime desc";
 		List list = getSession().createQuery(hql).setFirstResult(0)

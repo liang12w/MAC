@@ -6,7 +6,7 @@ function submit(){
 		};
 		var checked = $('#checked').val();
 		$.ajax({
-			url:"http://localhost:8080/GIFme/loginAction.do",
+			url:"loginAction.do",
 			type : "POST",
 			dataType:"json",
 			data:params,

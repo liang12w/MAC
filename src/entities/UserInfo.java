@@ -14,7 +14,8 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 @JsonIgnoreProperties(value={"adminAccountFrozenLog","followsesForFollowerId","adminCommentReviewLogs",
 		"adminMomentsReviewLogs","followsByUsrId","likeses", 
 		"commentses", "momentses","groupMemberses", "userPassword",
-		"usrId","securityId","firstLogin","lastLogin"})
+		"usrId","securityId","firstLogin","lastLogin",
+		"hibernateLazyInitializer","handler","fieldHandler"})
 public class UserInfo  implements java.io.Serializable {
 
 

@@ -3,7 +3,7 @@
  */
 function init(){
 	$.ajax({
-		url:"http://localhost:8080/GIFme/views/getOwnMomentsAction.do",
+		url:"getOwnMomentsAction.do",
 		type:"POST",
 		dataType:"json",
 		data:{'sid':$.cookie('sid')},
@@ -14,8 +14,9 @@ function init(){
 				alert(data.errorMsg);
 				window.location.href = '../login.html';
 			}else{
-				alert(data.errorMsg);
-				window.location.reload();
+				generateEmptyInfo();
+				// alert(data.errorMsg);
+				// window.location.reload();
 			}
 		},
 	});
@@ -37,6 +38,11 @@ function generateInfo(data){
 	$(".col-md-6").append(content);
 }
 
+function generateEmptyInfo(){
+	var content = "<h1>No Message.</h1>";
+	$(".col-md-6").append(content);
+}
+
 function showComments(motId){
 	if ($('#com'+motId).length<1) {
 		getComments(motId);
@@ -51,7 +57,7 @@ function getComments(motId){
 		'motId':motId
 	}
 	$.ajax({
-		url:"http://localhost:8080/GIFme/views/getCommentsAction.do",
+		url:"getCommentsAction.do",
 		type:"POST",
 		dataType:"json",
 		data:params,
@@ -106,7 +112,7 @@ function submitComment(motId){
 		'comment':$('#comment'+motId).val()
 	}
 	$.ajax({
-		url:"http://localhost:8080/GIFme/views/submitCommentsAction.do",
+		url:"submitCommentsAction.do",
 		type:"POST",
 		dataType:"json",
 		data:params,
@@ -131,7 +137,7 @@ function addLike(motId){
 		'motId':motId,
 	}
 	$.ajax({
-		url:"http://localhost:8080/GIFme/views/addLikeAction.do",
+		url:"addLikeAction.do",
 		type:"text",
 		dataType:"json",
 		data:params,
@@ -156,7 +162,7 @@ function removeLike(motId){
 		'motId':motId,
 	}
 	$.ajax({
-		url:"http://localhost:8080/GIFme/views/removeLikeAction.do",
+		url:"removeLikeAction.do",
 		type:"text",
 		dataType:"json",
 		data:params,

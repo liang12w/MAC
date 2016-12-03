@@ -3,7 +3,7 @@
  */
 $(function(){
 	$.ajax({
-		url:"http://localhost:8080/GIFme/views/getUserInfoAction.do",
+		url:"getUserInfoAction.do",
 		type:"POST",
 		dataType:"json",
 		data:{'sid':$.cookie('sid')},

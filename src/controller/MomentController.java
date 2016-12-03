@@ -47,10 +47,9 @@ public class MomentController {
 
 	@ResponseBody
 	@RequestMapping(value = "views/getMomentsAction", method = RequestMethod.POST)
-	public Map<String, Object> showAllMoment(HttpServletRequest request) {
+	public Map<String, Object> showAllMoment() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		int usrId = Integer.parseInt(request.getAttribute("usrId").toString());
-		List list = momentservice.showAllMoment(usrId);
+		List list = momentservice.showAllMoment();
 		if (list.size() != 0) {
 			map.put("errorCode", 0);
 			map.put("list", list);

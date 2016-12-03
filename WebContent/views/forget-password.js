@@ -10,7 +10,7 @@ function init(){
 			'email':email
 		}
 		$.ajax({
-		url:"http://localhost:8080/GIFme/validateEmailAction.do",
+		url:"validateEmailAction.do",
 		type:"POST",
 		dataType:"json",
 		data:params,

@@ -16,8 +16,8 @@ public class MomentService {
 	public boolean saveContent(String content,int id, String url){
 		return momentdao.saveContent(content,id, url);
 	}
-	public List showAllMoment(int id){
-		return momentdao.showAllMoment(id);
+	public List showAllMoment(){
+		return momentdao.showAllMoment();
 	}
 	public List showOwnMoment(int id){
 		
